@@ -1,3 +1,6 @@
+.. image:: https://badge.waffle.io/KnightHawk3/packr.png?label=ready&title=Ready 
+ :target: https://waffle.io/KnightHawk3/packr
+ :alt: 'Stories in Ready'
 ===============================
 Packr
 ===============================
