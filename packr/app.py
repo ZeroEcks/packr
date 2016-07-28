@@ -1,19 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
-The app module, containing the app factory function.
-"""
+"""The app module, containing the app factory function."""
 from flask import Flask, render_template
 
 from packr import public, user
 from packr.assets import assets
-from packr.extensions import bcrypt, cache, csrf_protect, db, \
-    debug_toolbar, login_manager, migrate
+from packr.extensions import (bcrypt, cache, csrf_protect, db, debug_toolbar,
+                              login_manager, migrate)
 from packr.settings import ProdConfig
 
 
 def create_app(config_object=ProdConfig):
-    """
-    An application factory
+    """An application factory.
 
     http://flask.pocoo.org/docs/patterns/appfactories/.
 
@@ -28,9 +25,7 @@ def create_app(config_object=ProdConfig):
 
 
 def register_extensions(app):
-    """
-    Register Flask extensions.
-    """
+    """Register Flask extensions."""
     assets.init_app(app)
     bcrypt.init_app(app)
     cache.init_app(app)
@@ -43,22 +38,16 @@ def register_extensions(app):
 
 
 def register_blueprints(app):
-    """
-    Register Flask blueprints.
-    """
+    """Register Flask blueprints."""
     app.register_blueprint(public.views.blueprint)
     app.register_blueprint(user.views.blueprint)
     return None
 
 
 def register_errorhandlers(app):
-    """
-    Register error handlers.
-    """
+    """Register error handlers."""
     def render_error(error):
-        """
-        Render error template.
-        """
+        """Render error template."""
         # If a HTTPException, pull the `code` attribute; default to 500
         error_code = getattr(error, 'code', 500)
         return render_template('{0}.html'.format(error_code)), error_code

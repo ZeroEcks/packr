@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
-"""
-User models.
-"""
+"""User models."""
 import datetime as dt
 
 from flask_login import UserMixin
 
-from packr.database import Column, Model, SurrogatePK, db, \
-    reference_col, relationship
+from packr.database import (Column, Model, SurrogatePK, db, reference_col,
+                            relationship)
 from packr.extensions import bcrypt
 
 
 class Role(SurrogatePK, Model):
-    """
-    A role for a user.
-    """
+    """A role for a user."""
 
     __tablename__ = 'roles'
     name = Column(db.String(80), unique=True, nullable=False)
@@ -22,22 +18,16 @@ class Role(SurrogatePK, Model):
     user = relationship('User', backref='roles')
 
     def __init__(self, name, **kwargs):
-        """
-        Create instance.
-        """
+        """Create instance."""
         db.Model.__init__(self, name=name, **kwargs)
 
     def __repr__(self):
-        """
-        Represent instance as a unique string.
-        """
+        """Represent instance as a unique string."""
         return '<Role({name})>'.format(name=self.name)
 
 
 class User(UserMixin, SurrogatePK, Model):
-    """
-    A user of the app.
-    """
+    """A user of the app."""
 
     __tablename__ = 'users'
     username = Column(db.String(80), unique=True, nullable=False)
@@ -53,9 +43,7 @@ class User(UserMixin, SurrogatePK, Model):
     is_admin = Column(db.Boolean(), default=False)
 
     def __init__(self, username, email, password=None, **kwargs):
-        """
-        Create instance.
-        """
+        """Create instance."""
         db.Model.__init__(self, username=username, email=email, **kwargs)
         if password:
             self.set_password(password)
@@ -63,26 +51,18 @@ class User(UserMixin, SurrogatePK, Model):
             self.password = None
 
     def set_password(self, password):
-        """
-        Set password.
-        """
+        """Set password."""
         self.password = bcrypt.generate_password_hash(password)
 
     def check_password(self, value):
-        """
-        Check password.
-        """
+        """Check password."""
         return bcrypt.check_password_hash(self.password, value)
 
     @property
     def full_name(self):
-        """
-        Full user name.
-        """
+        """Full user name."""
         return '{0} {1}'.format(self.first_name, self.last_name)
 
     def __repr__(self):
-        """
-        Represent instance as a unique string.
-        """
+        """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)

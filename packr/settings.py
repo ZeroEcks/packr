@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
-"""
-Application configuration.
-"""
+"""Application configuration."""
 import os
 
 
 class Config(object):
-    """
-    Base configuration.
-    """
+    """Base configuration."""
 
     # TODO: Change me
     SECRET_KEY = os.environ.get('PACKR_SECRET', 'ayylmao')
@@ -23,9 +19,7 @@ class Config(object):
 
 
 class ProdConfig(Config):
-    """
-    Production configuration.
-    """
+    """Production configuration."""
 
     ENV = 'prod'
     DEBUG = False
@@ -35,9 +29,7 @@ class ProdConfig(Config):
 
 
 class DevConfig(Config):
-    """
-    Development configuration.
-    """
+    """Development configuration."""
 
     ENV = 'dev'
     DEBUG = True
@@ -51,9 +43,7 @@ class DevConfig(Config):
 
 
 class TestConfig(Config):
-    """
-    Test configuration.
-    """
+    """Test configuration."""
 
     TESTING = True
     DEBUG = True

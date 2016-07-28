@@ -24,10 +24,7 @@ migrate = Migrate(app, db)
 
 
 def _make_context():
-    """
-    Return context dict for a shell session so you can access app, db,
-    and the User model by default.
-    """
+    """Return context dict for a shell session with app, db, and the User."""
     return {'app': app, 'db': db, 'User': User}
 
 
@@ -40,14 +37,10 @@ def test():
 
 
 class Lint(Command):
-    """
-    Lint and check code style with flake8 and isort.
-    """
+    """Lint and check code style with flake8 and isort."""
 
     def get_options(self):
-        """
-        Command line options.
-        """
+        """Command line options."""
         return (
             Option('-f', '--fix-imports', action='store_true',
                    dest='fix_imports',

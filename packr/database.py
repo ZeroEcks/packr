@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""
-Database module, including the SQLAlchemy database object
-and DB-related utilities.
+"""Database module.
+
+Including the SQLAlchemy database object and DB-related utilities.
 """
 from sqlalchemy.orm import relationship
 
@@ -14,47 +14,35 @@ relationship = relationship
 
 
 class CRUDMixin(object):
-    """
-    Mixin that adds convenience methods for CRUD operations.
-    """
+    """Mixin that adds convenience methods for CRUD operations."""
 
     @classmethod
     def create(cls, **kwargs):
-        """
-        Create a new record and save it the database.
-        """
+        """Create a new record and save it the database."""
         instance = cls(**kwargs)
         return instance.save()
 
     def update(self, commit=True, **kwargs):
-        """
-        Update specific fields of a record.
-        """
+        """Update specific fields of a record."""
         for attr, value in kwargs.items():
             setattr(self, attr, value)
         return commit and self.save() or self
 
     def save(self, commit=True):
-        """
-        Save the record.
-        """
+        """Save the record."""
         db.session.add(self)
         if commit:
             db.session.commit()
         return self
 
     def delete(self, commit=True):
-        """
-        Remove the record from the database.
-        """
+        """Remove the record from the database."""
         db.session.delete(self)
         return commit and db.session.commit()
 
 
 class Model(CRUDMixin, db.Model):
-    """
-    Base model class that includes CRUD convenience methods.
-    """
+    """Base model class that includes CRUD convenience methods."""
 
     __abstract__ = True
 
@@ -62,8 +50,9 @@ class Model(CRUDMixin, db.Model):
 # From Mike Bayer's "Building the app" talk
 # https://speakerdeck.com/zzzeek/building-the-app
 class SurrogatePK(object):
-    """
-    A mixin that adds a surrogate integer 'primary key' column
+    """Adds int primary key called id to any declarative class.
+
+    Adds a surrogate integer 'primary key' column
     named ``id`` to any declarative-mapped class.
     """
 
@@ -83,8 +72,7 @@ class SurrogatePK(object):
 
 
 def reference_col(tablename, nullable=False, pk_name='id', **kwargs):
-    """
-    Column that adds primary key foreign key reference.
+    """Column that adds primary key foreign key reference.
 
     Usage: ::
 
