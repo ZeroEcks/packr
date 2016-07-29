@@ -5,6 +5,6 @@ nav ul a, nav .brand-logo {
     color: #444;
 }
 
-form#loginForm {
-
+form.form-inline, form.form-inline input {
+    display: inline !important;
 }
