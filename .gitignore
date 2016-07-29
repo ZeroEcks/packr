@@ -56,3 +56,4 @@ packr/static/libs
 tests/.cache
 *common.css
 *common.js
+migrations/
