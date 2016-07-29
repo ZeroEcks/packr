@@ -60,12 +60,14 @@
     {% include "footer.html" %}
 
     <!-- JavaScript at the bottom for fast page loading -->
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
     {% assets "js_all" %}
     <script type="text/javascript" src="{{ ASSET_URL }}"></script>
     {% endassets %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
-    {% block js %}{% endblock %}
+    <script>
+        {% block js %}{% endblock %}
+    </script>
     <!-- end scripts -->
     {% endblock %}
 </body>
