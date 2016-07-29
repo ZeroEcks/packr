@@ -52,3 +52,7 @@ env/
 
 # Project Specific File
 dev.db
+packr/static/libs
+tests/.cache
+*common.css
+*common.js
