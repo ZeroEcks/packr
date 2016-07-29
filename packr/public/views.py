@@ -54,6 +54,7 @@ def about():
     """About page."""
     return render_template('public/about.html')
 
+
 @blueprint.route('/login/', methods=['GET', 'POST'])
 def login():
     """Login page."""
