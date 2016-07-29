@@ -49,3 +49,6 @@ env/
 
 # Jetbrains
 .idea/
+
+# Project Specific File
+dev.db
