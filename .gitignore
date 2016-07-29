@@ -46,3 +46,6 @@ docs/_build
 
 # Virtualenvs
 env/
+
+# Jetbrains
+.idea/
