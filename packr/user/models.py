@@ -31,7 +31,7 @@ class User(UserMixin, SurrogatePK, Model):
 
     __tablename__ = 'users'
     username = Column(db.String(80), unique=True, nullable=False)
-    email = Column(db.String(80), unique=True, nullable=False)
+    email = Column(db.String(254), unique=True, nullable=False)
     #: The hashed password
     password = Column(db.String(128), nullable=True)
     created_at = Column(db.DateTime,
@@ -41,6 +41,9 @@ class User(UserMixin, SurrogatePK, Model):
     last_name = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=False)
     is_admin = Column(db.Boolean(), default=False)
+    is_business = Column(db.Boolean(), default=False)
+    address = Column(db.String(300), nullable=True)
+    phone = Column(db.String(16), nullable=True)
 
     def __init__(self, username, email, password=None, **kwargs):
         """Create instance."""
