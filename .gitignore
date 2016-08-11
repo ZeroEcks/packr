@@ -57,3 +57,5 @@ tests/.cache
 *common.css
 *common.js
 migrations/
+
+.vagrant/
