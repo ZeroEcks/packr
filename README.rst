@@ -1,9 +1,14 @@
-.. image:: https://badge.waffle.io/KnightHawk3/packr.png?label=ready&title=Ready 
- :target: https://waffle.io/KnightHawk3/packr
- :alt: 'Stories in Ready'
 ===============================
 Packr
 ===============================
+
+.. image:: https://badge.waffle.io/KnightHawk3/packr.png?label=ready&title=Ready 
+ :target: https://waffle.io/KnightHawk3/packr
+ :alt: 'Stories in Ready'
+
+.. image:: https://travis-ci.org/KnightHawk3/packr.svg?branch=master
+  :target: https://travis-ci.org/KnightHawk3/packr
+  :alt: 'Build status'
 
 For package management
 
@@ -25,13 +30,15 @@ Then run the following commands to bootstrap your environment.
 
     git clone https://github.com/KnightHawk3/packr
     cd packr
-    pip install -r requirements/dev.txt
-    bower install
-    python manage.py server
+    vagrant up
+    vagrant ssh
+    cd packr
+    python manage.py runserver -p 80 -h 0.0.0.0
 
-You will see a pretty welcome screen.
+You will see a pretty welcome screen at 192.168.33.11, this ip is only accessible from your computer (its virtual and stuff).
+You can also modify the files in the packr folder on your local computer and it will be mirrored across to the virtual machine instantly (its a network store technically)
 
-Once you have installed your DBMS, run the following to create your app's database tables and perform the initial migration:
+These commands are to make your database work if its broken, probably dont need this unless you know what your doing.
 
 ::
 
