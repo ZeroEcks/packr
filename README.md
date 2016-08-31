@@ -1,5 +1,5 @@
-# Flask-Angular-Starter
-Start your next hackathon or side project with the initial cruft out of the way. This project gets you an AngularJS with a reactive Material Design SPA frontend and a configured Python Flask REST API backend. No more will you have to suffer the monotony of implementing yet another user authentication system for your new projects, as this repo sets you up with both registration and login using JSON Web Tokens. Forget about the annoying and verbose web service code and expand the applications capabilities easily and succinctly with Python and Flask.
+# Packr
+Post packages in style!
 
 ## Application stack and tools
 Framework/tool | Description
@@ -41,15 +41,3 @@ env/bin/python3.4 run.py
 * Bower packages can be installed by running `bower install <package name>`.
 * After modifying any database entities, run `env/bin/python3.4 manage.py db migrate`. This will add a new migration entry to `migrations/versions`.
 * A Gulp watch task has been written to rebuild frontend assets after a change has been made. It also pipes the JS sources through JSHint to catch errors and warnings.
-
-## Contributing
-* Issue tracking
-    * For any proposed features or bugs, please open an issue to allow for tracking of the item.
-
-* Submitting changes
-    * Fork the repository and switch to a new branch with `git checkout -b <branch-name>`
-    * Make all necessary changes and submit a new pull request. Please provide detailed information to help facilitate understanding of the changes. Reference the issue that the pull request applies to.
-    * After a code review, the pull request will either be accepted or rejected.
-
-## License
-[MIT](LICENSE) Luke Walter
