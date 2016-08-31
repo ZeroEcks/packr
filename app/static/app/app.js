@@ -8,7 +8,10 @@
     ];
     var app = angular.module('App', appDeps);
 
-    app.config(function ($interpolateProvider, $routeProvider, $locationProvider, $httpProvider) {
+    app.config(function ($interpolateProvider, $routeProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
+        $mdThemingProvider.theme('default')
+            .primaryPalette('purple')
+            .accentPalette('yellow');
         $interpolateProvider.startSymbol('//');
         $interpolateProvider.endSymbol('//');
 

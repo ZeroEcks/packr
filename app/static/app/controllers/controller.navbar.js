@@ -1,9 +1,10 @@
 (function () {
     'use strict';
 
-    var deps = ['AuthService', '$location'];
-    function navbarController(AuthService, $location) {
+    var deps = ['AuthService', '$location', '$rootScope', '$scope'];
+    function navbarController(AuthService, $location, $rootScope, $scope) {
         var self = this;
+        $scope.toggleLeft = function(){$rootScope.$broadcast('toggleLeft', 'lmao')};
 
         self.userLoggedIn = function () {
             return AuthService.isUserLoggedIn();
@@ -21,6 +22,7 @@
             AuthService.logoutUser();
         };
     }
+
 
     navbarController.$inject = deps;
     angular.module('App').controller('NavbarController', navbarController);

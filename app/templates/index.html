@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Untitled</title>
-    <base href="/">
-    <link rel="stylesheet" href="static/public/app-bundle-styles.css">
-    <link rel="stylesheet" href="static/public/libs-bundle-styles.css">
-    <script src="static/public/libs-bundle.js"></script>
-    <script src="static/public/app-bundle.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <title>Untitled</title>
+        <base href="/">
+        <link rel="stylesheet" href="static/public/app-bundle-styles.css">
+        <link rel="stylesheet" href="static/public/libs-bundle-styles.css">
+        <script src="static/public/libs-bundle.js"></script>
+        <script src="static/public/app-bundle.js"></script>
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-<body ng-app="App">
-    <navbar></navbar>
-    <div ng-view ng-cloak layout="column"></div>
-</body>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body ng-app="App" ng-cloak>
+        <section layout="row" layout-fill>
+            <sidenav></sidenav>
+            <div layout="column" flex>
+                <navbar></navbar>
+                <div ng-view ng-cloak flex layout="column"></div>
+            </div>
+        </section>
+    </body>
 </html>

@@ -3,8 +3,6 @@
 
     var deps = ['DataService'];
     function protectedController (DataService) {
-        var self = this;
-
         DataService.get('/api/protected')
             .then(function (result) {
                 console.log(result);

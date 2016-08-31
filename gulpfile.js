@@ -1,4 +1,7 @@
+'use strict';
+
 var gulp = require('gulp');
+var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var concatCss = require('gulp-concat-css');
@@ -17,7 +20,8 @@ var angularLibsCss = [
     'app/static/libs/angular-material/angular-material.layouts.css'
 ];
 var angularAppJs = ['app/static/app/**/*.js'];
-var angularAppCss = ['app/static/css/*.css'];
+//var angularAppCss = ['app/static/css/*.css'];
+var angularAppScss = ['app/static/css/*.scss'];
 
 // Tasks
 gulp.task('jshint', function () {
@@ -28,7 +32,7 @@ gulp.task('jshint', function () {
 
 gulp.task('watch', function () {
     gulp.watch(angularAppJs, ['jshint', 'concat-app-js']);
-    gulp.watch(angularAppCss, ['concat-app-css']);
+    gulp.watch(angularAppScss, ['sass']);
 });
 
 gulp.task('concat-app-js', function () {
@@ -37,8 +41,9 @@ gulp.task('concat-app-js', function () {
         .pipe(gulp.dest('app/static/public/'));
 });
 
-gulp.task('concat-app-css', function () {
-    return gulp.src(angularAppCss)
+gulp.task('sass', function () {
+    return gulp.src(angularAppScss)
+        .pipe(sass().on('error', sass.logError))
         .pipe(concatCss('app-bundle-styles.css'))
         .pipe(gulp.dest('app/static/public/'));
 });
@@ -55,4 +60,4 @@ gulp.task('concat-libs-js', function () {
         .pipe(gulp.dest('app/static/public/'));
 });
 
-gulp.task('build-app', ['concat-app-js', 'concat-app-css', 'concat-libs-js', 'concat-libs-css']);
+gulp.task('build-app', ['concat-app-js', 'sass', 'concat-libs-js', 'concat-libs-css']);
