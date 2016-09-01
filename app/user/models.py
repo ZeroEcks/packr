@@ -9,14 +9,18 @@ class Users(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):
     firstname = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
+    business_account = db.Column(db.Boolean(), nullable=False, default=False)
+    admin_account = db.Column(db.Boolean(), nullable=False, default=False)
 
-    def __init__(self, email, firstname, lastname, password):
+    def __init__(self, email, firstname, lastname, password, business_account, admin_account):
         super().__init__()
 
         self.email = email
         self.password = bcrypt.generate_password_hash(password)
         self.firstname = firstname
         self.lastname = lastname
+        self.business_account = business_account
+        self.admin_account = admin_account
 
     def __repr__(self):
         return '<User {0}>'.format(self.email)
