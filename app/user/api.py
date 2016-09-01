@@ -1,4 +1,4 @@
-from .models import Users
+from .models import User
 from flask_restful import Resource, reqparse
 from sqlalchemy.exc import IntegrityError
 from flask import current_app
@@ -36,10 +36,10 @@ class UserApi(Resource):
         if lastname == '':
             return {'message': {'lastname': 'No last name provided'}}, 400
 
-        new_user = Users(email=email,
-                         firstname=firstname,
-                         lastname=lastname,
-                         password=password)
+        new_user = User(email=email,
+                        firstname=firstname,
+                        lastname=lastname,
+                        password=password)
 
         try:
             new_user.save()

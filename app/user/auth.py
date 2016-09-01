@@ -1,10 +1,10 @@
 from datetime import datetime
 from config import Config
-from .models import Users
+from .models import User
 
 
 def authenticate(email, password):
-    user = Users.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first()
 
     if not user or not user.verify_password(password):
         return None
@@ -14,7 +14,7 @@ def authenticate(email, password):
 
 def identity(payload):
     user_id = payload['identity']
-    user = Users.query.get(user_id)
+    user = User.query.get(user_id)
 
     if not user:
         return None

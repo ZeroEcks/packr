@@ -1,18 +1,21 @@
 from app.extensions import db, bcrypt
 from app.core.models import CreatedAtMixin, IdMixin, CRUDMixin
+from app.order.models import Order
 
 
-class Users(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):
-    __tablename__ = 'users'
+class User(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):
+    __tablename__ = 'user'
 
     email = db.Column(db.String(200), unique=True, nullable=False)
     firstname = db.Column(db.String(120), nullable=False)
     lastname = db.Column(db.String(120), nullable=False)
     password = db.Column(db.String(120), nullable=False)
-    business_account = db.Column(db.Boolean(), nullable=False, default=False)
-    admin_account = db.Column(db.Boolean(), nullable=False, default=False)
+    business_account = db.Column(db.Boolean, nullable=True, default=False)
+    admin_account = db.Column(db.Boolean, nullable=True, default=False)
 
-    def __init__(self, email, firstname, lastname, password, business_account, admin_account):
+    orders = db.relationship('Order', backref='user', lazy='joined')
+
+    def __init__(self, email, firstname, lastname, password, business_account=False, admin_account=False):
         super().__init__()
 
         self.email = email
