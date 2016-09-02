@@ -15,3 +15,6 @@ install:
 script: 
     - python manage.py db init
     - python manage.py db upgrade
+cache:
+    - pip
+    - npm
