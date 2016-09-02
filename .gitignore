@@ -7,5 +7,6 @@ node_modules
 *app.db
 *logs
 *log
+.ropeproject/
 app/static/public
 migrations/
