@@ -1,6 +1,6 @@
-from datetime import timedelta
-import os
 import logging
+import os
+from datetime import timedelta
 
 
 class Config(object):

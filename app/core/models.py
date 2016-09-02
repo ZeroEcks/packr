@@ -1,10 +1,14 @@
 from datetime import datetime
+
 from flask_jwt import current_identity
+
 from app.extensions import db
 
 
 class CreatedByMixin:
-    created_by = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    created_by = db.Column(db.Integer,
+                           db.ForeignKey('users.id'),
+                           nullable=False)
 
     def __init__(self):
         super().__init__()
@@ -26,7 +30,10 @@ class CreatedAtMixin:
 
 
 class IdMixin:
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True,
+                   nullable=False)
 
     def __init__(self):
         super().__init__()

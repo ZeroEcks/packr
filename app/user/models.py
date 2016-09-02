@@ -1,6 +1,8 @@
-from app.extensions import db, bcrypt
-from app.core.models import CreatedAtMixin, IdMixin, CRUDMixin
-from app.order.models import Order
+from app.core.models import CreatedAtMixin, CRUDMixin, IdMixin
+from app.extensions import bcrypt, db
+
+
+# from app.order.models import Order
 
 
 class User(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):
@@ -15,7 +17,8 @@ class User(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):
 
     orders = db.relationship('Order', backref='user', lazy='joined')
 
-    def __init__(self, email, firstname, lastname, password, business_account=False, admin_account=False):
+    def __init__(self, email, firstname, lastname, password,
+                 business_account=False, admin_account=False):
         super().__init__()
 
         self.email = email

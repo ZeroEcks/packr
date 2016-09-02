@@ -1,5 +1,5 @@
+from app.core.models import CreatedAtMixin, CRUDMixin, IdMixin
 from app.extensions import db
-from app.core.models import CreatedAtMixin, IdMixin, CRUDMixin
 
 
 class Order(CreatedAtMixin, CRUDMixin, IdMixin, db.Model):

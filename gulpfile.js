@@ -20,14 +20,14 @@ var angularLibsCss = [
     'app/static/libs/angular-material/angular-material.layouts.css'
 ];
 var angularAppJs = ['app/static/app/**/*.js'];
-//var angularAppCss = ['app/static/css/*.css'];
 var angularAppScss = ['app/static/css/*.scss'];
 
 // Tasks
 gulp.task('jshint', function () {
     return gulp.src(angularAppJs)
         .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'));
+        .pipe(jshint.reporter('jshint-stylish'))
+        .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('watch', function () {
@@ -38,7 +38,7 @@ gulp.task('watch', function () {
 gulp.task('concat-app-js', function () {
     return gulp.src(angularAppJs)
         .pipe(concat('app-bundle.js'))
-        .pipe(gulp.dest('app/static/public/'));
+        .pipe(gulp.dest('app/static/public/')) ;
 });
 
 gulp.task('sass', function () {
@@ -60,4 +60,5 @@ gulp.task('concat-libs-js', function () {
         .pipe(gulp.dest('app/static/public/'));
 });
 
-gulp.task('build-app', ['concat-app-js', 'sass', 'concat-libs-js', 'concat-libs-css']);
+gulp.task('build-app', ['concat-app-js', 'jshint', 'sass', 'concat-libs-js', 'concat-libs-css']);
+gulp.task('default', ['jshint', 'build-app', 'watch']);

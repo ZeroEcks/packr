@@ -1,5 +1,7 @@
 from datetime import datetime
+
 from config import Config
+
 from .models import User
 
 
@@ -27,5 +29,11 @@ def payload_handler(identity):
     exp = iat + Config.JWT_EXPIRATION_DELTA
     nbf = iat + Config.JWT_NOT_BEFORE_DELTA
     identity_id = getattr(identity, 'id') or identity['id']
-    identity_firstname = getattr(identity, 'firstname') or identity['firstname']
-    return {'exp': exp, 'iat': iat, 'nbf': nbf, 'identity': identity_id, 'firstname': identity_firstname}
+    identity_name = getattr(identity, 'firstname') or identity['firstname']
+    return {
+        'exp': exp,
+        'iat': iat,
+        'nbf': nbf,
+        'identity': identity_id,
+        'firstname': identity_name
+    }

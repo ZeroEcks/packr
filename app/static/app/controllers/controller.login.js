@@ -3,7 +3,7 @@
 
     var deps = ['DataService', 'AuthService', '$location'];
     function loginController(DataService, AuthService, $location) {
-        var self = this;
+        var self = this; // jshint ignore:line
         self.user = {
             email: '',
             password: ''

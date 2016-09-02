@@ -15,6 +15,9 @@ install:
 script: 
     - python manage.py db init
     - python manage.py db upgrade
+    - python manage.py lint -f
+    - python manage.py test
+    - gulp jshint
 cache:
     - pip
     - npm

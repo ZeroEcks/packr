@@ -3,7 +3,7 @@
 
     var deps = ['DataService', 'ErrorHelperService', '$location'];
     function registerController(DataService, ErrorHelperService, $location) {
-        var self = this;
+        var self = this; // jshint ignore:line
         self.user = {
             firstname: '',
             lastname: '',
