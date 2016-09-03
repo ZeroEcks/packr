@@ -19,9 +19,9 @@ script:
     - python manage.py test
     - gulp jshint
 cache:
-    - pip
+    pip: true
     directories:
         - node_modules # NPM packages
         - app/static/libs # Bower packages
 notifications:
-      slack: dirtyspacepirates:w02cmaNBga3UOhRAe4Mx3NRf
+    slack: dirtyspacepirates:w02cmaNBga3UOhRAe4Mx3NRf
