@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 """The app module, containing the app factory function."""
+from datetime import datetime
+
 from flask import Flask
 
-from datetime import datetime
+from packr.api import blueprint as api_blueprint
+from packr.extensions import bcrypt, cache, db, jwt, migrate
 from packr.models import User
-from packr.api import blueprint as api
-from packr.extensions import bcrypt, cache, db, migrate, jwt # noqa
-from packr.settings import ProdConfig, Config
+from packr.settings import Config, ProdConfig
 
 
 def create_app(config_object=ProdConfig):
@@ -37,8 +38,8 @@ def register_extensions(app):
 def register_blueprints(app):
     """Register Flask blueprints."""
     from packr.home.views import home
-    app.register_blueprint(api, url_prefix='/api/')
-    # app.register_blueprint(home)
+    app.register_blueprint(api_blueprint, url_prefix='/api')
+    app.register_blueprint(home)
     return None
 
 

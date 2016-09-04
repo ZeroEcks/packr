@@ -4,13 +4,14 @@
 import pytest
 from webtest import TestApp
 
-from app import create_app
+from packr.app import create_app
+from packr.settings import TestConfig
 
 
 @pytest.yield_fixture(scope='function')
 def app():
     """An application for the tests."""
-    _app = create_app()
+    _app = create_app(config_object=TestConfig)
     ctx = _app.test_request_context()
     ctx.push()
 

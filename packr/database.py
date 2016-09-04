@@ -2,10 +2,7 @@
 """Database module.
 Including the SQLAlchemy database object and DB-related utilities.
 """
-from datetime import datetime
-
 from sqlalchemy.orm import relationship
-from flask_jwt import current_identity
 
 from .compat import basestring
 from .extensions import db

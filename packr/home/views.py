@@ -1,5 +1,4 @@
-from flask import render_template, Blueprint
-
+from flask import Blueprint, render_template
 
 home = Blueprint('home', __name__)
 

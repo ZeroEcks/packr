@@ -6,7 +6,6 @@ from glob import glob
 from subprocess import call
 
 from flask import url_for
-
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Command, Manager, Option, Server, Shell
 from flask_script.commands import Clean, ShowUrls
@@ -84,9 +83,11 @@ class Lint(Command):
 
         if fix_imports:
             execute_tool('Fixing import order', 'isort',
-                         '-sg', 'node_modules', '-rc')
+                         '-sg', 'migrations',
+                         '-sg', 'node_modules',
+                         '-rc')
             execute_tool('Checking code style', 'flake8',
-                         '--exclude', 'node_modules')
+                         '--exclude', 'node_modules,migrations')
 
 
 manager.add_command('server', Server())

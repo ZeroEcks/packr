@@ -1,13 +1,12 @@
 import re
 
-from flask_restplus import Resource, fields, Namespace
-from packr.models import User
+from flask_restplus import Namespace, Resource, fields, reqparse
 from sqlalchemy.exc import IntegrityError
-from flask_restplus import reqparse
+
+from packr.models import User
 
 api = Namespace('user',
                 description='Operations related to the current user')
-
 
 user = api.model('User', {
     'id': fields.Integer(readOnly=True,
@@ -26,13 +25,6 @@ user = api.model('User', {
 @api.route('/')
 class UserItem(Resource):
 
-    @api.marshal_with(user)
-    def get(self, id):
-        """
-        Returns a category with a list of posts.
-        """
-        return User.query.filter(User.id == id).one()
-
     @api.expect(user)
     @api.response(204, 'User successfully updated.')
     def put(self):
@@ -43,7 +35,7 @@ class UserItem(Resource):
         ```
         {
           "firstname": "New Firstname",
-          "lastname": "New Lastname"
+          "lastname": "New Lastname",
           "email": "New Email",
           "password": "New Password"
         }
@@ -87,9 +79,9 @@ class UserItem(Resource):
             return {'message': {'password': 'Invalid password provided'}}, 400
         elif len(password) < 8:
             return {
-                'message': {
-                    'password': 'Password must be at least 8 characters long'
-                }
+               'message': {
+                   'password': 'Password must be at least 8 characters long'  # noqa
+               }
             }, 400
 
         if firstname == '':
@@ -105,11 +97,13 @@ class UserItem(Resource):
 
         try:
             new_user.save()
-        except IntegrityError:
+        except IntegrityError as e:
+            print(e)
             return {
-                'description': 'User with given email already exists.'
-            }, 409
-        except Exception:
+                       'description': 'User with given email already exists.'
+                   }, 409
+        except Exception as e:
+            print(e)
             return {'description': 'Server encountered an error.'}, 500
 
         return {'email': new_user.email}, 201

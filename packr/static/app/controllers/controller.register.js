@@ -12,7 +12,7 @@
         };
 
         self.registerUser = function () {
-            DataService.post('/api/user/register', self.user)
+            DataService.post('/auth', self.user)
                 .then(function (data) {
                     $location.path('/');
                 })

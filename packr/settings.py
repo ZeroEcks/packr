@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """Application configuration."""
-import os
 import logging
-
+import os
 from datetime import timedelta
 
 
@@ -22,8 +21,9 @@ class Config(object):
     JWT_EXPIRATION_DELTA = timedelta(seconds=86400)
     JWT_NOT_BEFORE_DELTA = timedelta(seconds=0)
 
-    LOGGING_LEVEL = logging.INFO
+    LOGGING_LEVEL = logging.DEBUG
     LOGGING_LOCATION = 'app.logs'
+    DEBUG = True
 
 
 class ProdConfig(Config):
@@ -53,6 +53,8 @@ class TestConfig(Config):
 
     TESTING = True
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    DB_NAME = 'dev.db'
+    DB_PATH = os.path.join(Config.PROJECT_ROOT, DB_NAME)
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///{0}'.format(DB_PATH)
     # For faster tests; needs at least 4 to avoid "ValueError: Invalid rounds"
     BCRYPT_LOG_ROUNDS = 4
