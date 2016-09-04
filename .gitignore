@@ -1,5 +1,4 @@
 env
-app/static/libs
 *.idea
 *pyc
 node_modules
@@ -8,5 +7,7 @@ node_modules
 *logs
 *log
 .ropeproject/
-app/static/public
+packr/static/public
+packr/static/libs
 migrations/
+.cache/
