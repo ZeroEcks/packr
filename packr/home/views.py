@@ -1,5 +1,4 @@
-from flask import render_template, Blueprint
-
+from flask import Blueprint, render_template
 
 home = Blueprint('home', __name__)
 
@@ -7,4 +6,5 @@ home = Blueprint('home', __name__)
 @home.route('/', defaults={'path': ''})
 @home.route('/<path:path>')
 def index(path):
+    print('angularhit')
     return render_template('index.html')

@@ -3,8 +3,8 @@
 
     var deps = ['AuthService', '$location', '$rootScope', '$scope'];
     function navbarController(AuthService, $location, $rootScope, $scope) {
-        var self = this;
-        $scope.toggleLeft = function(){$rootScope.$broadcast('toggleLeft', 'lmao')};
+        var self = this; // jshint ignore:line
+        $scope.toggleLeft = function(){$rootScope.$broadcast('toggleLeft', 'lmao');};
 
         self.userLoggedIn = function () {
             return AuthService.isUserLoggedIn();
