@@ -3,7 +3,7 @@
 
     var deps = ['$mdToast', 'message'];
     function toastCtrl($mdToast, message) {
-        var self = this;
+        var self = this; // jshint ignore:line
         self.message = message;
 
         self.closeToast = function () {
