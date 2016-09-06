@@ -1,7 +1,10 @@
 {
   "name": "flask-angular-starter",
   "version": "1.0.0",
-  "description": "Python3 Flask, Angular1.5 starter project",
+  "description": "Packing things :)",
+  "scripts": {
+      "postinstall": "bower install && gulp build-app"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lwalter/flask-angular-starter.git"
@@ -12,7 +15,7 @@
     "angular",
     "material"
   ],
-  "author": "Luke Walter",
+  "author": "Dirty Space Pirates",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lwalter/flask-angular-starter/issues"
