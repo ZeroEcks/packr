@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/lwalter/flask-angular-starter#readme",
   "dependencies": {
+    "gulp": "^3.9.1",
     "bower": "^1.7.7"
   },
   "devDependencies": {
