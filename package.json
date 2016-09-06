@@ -2,6 +2,9 @@
   "name": "flask-angular-starter",
   "version": "1.0.0",
   "description": "Packing things :)",
+  "engines": {
+      "node": "6.5.0"
+  },
   "scripts": {
       "postinstall": "bower install && gulp build-app"
   },
@@ -21,7 +24,9 @@
     "url": "https://github.com/lwalter/flask-angular-starter/issues"
   },
   "homepage": "https://github.com/lwalter/flask-angular-starter#readme",
-  "dependencies": {},
+  "dependencies": {
+    "bower": "^1.7.7"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "gulp": "^3.9.1",
