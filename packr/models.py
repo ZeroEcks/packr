@@ -2,8 +2,7 @@
 """User models."""
 import datetime as dt
 
-from packr.database import (Column, Model, SurrogatePK, db, reference_col,
-                            relationship)
+from packr.database import Column, Model, SurrogatePK, db, relationship
 from packr.extensions import bcrypt
 
 
@@ -11,9 +10,7 @@ class Role(SurrogatePK, Model):
     """A role for a user."""
 
     __tablename__ = 'roles'
-    name = Column(db.String(80), unique=True, nullable=False)
-    user_id = reference_col('users', nullable=True)
-    user = relationship('User', backref='roles')
+    role_name = Column(db.String(80), unique=True, nullable=False)
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -21,7 +18,7 @@ class Role(SurrogatePK, Model):
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<Role({name})>'.format(name=self.name)
+        return '<Role({name})>'.format(name=self.role_name)
 
 
 class User(SurrogatePK, Model):
@@ -36,12 +33,12 @@ class User(SurrogatePK, Model):
     firstname = Column(db.String(30), nullable=True)
     lastname = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=True)
-    is_admin = Column(db.Boolean(), default=False)
-    is_driver = Column(db.Boolean(), default=False)
-
     business_account = db.Column(db.Boolean, nullable=True, default=False)
 
-    # orders = db.relationship('Order', backref='user', lazy='joined')
+    role_id = Column(db.Integer(), db.ForeignKey('roles.id'))
+    role = relationship('Role', lazy='joined')
+
+    orders = db.relationship('Order', backref='user', lazy='joined')
 
     def __init__(self, email, password=None, **kwargs):
         """Create instance."""
@@ -69,3 +66,106 @@ class User(SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<User({username!r})>'.format(username=self.username)
+
+
+class Order(SurrogatePK, Model):
+    """An order."""
+
+    __tablename__ = 'orders'
+    created_at = Column(db.DateTime,
+                        nullable=False,
+                        default=dt.datetime.utcnow)
+    weight = Column(db.Float(), nullable=False)
+    status = relationship("OrderStatus", backref='order')
+    details = Column(db.Text, nullable=True)
+    notes = Column(db.Text, nullable=True)
+    driver_notes = Column(db.Text, nullable=True)
+    cost = Column(db.Float, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    type_id = Column(db.Integer(), db.ForeignKey('delivery_types.id'))
+    delivery_type = relationship("DeliveryType", uselist=False)
+
+    payment = relationship("Payment",
+                           backref=db.backref("order", uselist=False))
+    package = relationship("Package", backref="order")
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Order({id})>'.format(id=self.id)
+
+
+class OrderStatus(SurrogatePK, Model):
+    """A status for an order."""
+
+    __tablename__ = 'order_statuses'
+    status = Column(db.String(80), nullable=False)
+    time = Column(db.Time(), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<OrderStatus({status}, {time})>'.format(status=self.status,
+                                                        time=self.time)
+
+
+class DeliveryType(SurrogatePK, Model):
+    """A type for a delivery."""
+
+    __tablename__ = "delivery_types"
+    # Can't call it name due to table name stored as name
+    type_name = Column(db.String(12), nullable=False)
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<DeliveryType({name})>'.format(name=self.type_name)
+
+
+class Payment(SurrogatePK, Model):
+    """A payment for an order."""
+
+    __tablename__ = "payments"
+    stripe_id = Column(db.Integer, nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Payment({id}, {stripe_id})>'.format(id=self.id,
+                                                     stripe_id=self.stripe_id)
+
+
+class Package(SurrogatePK, Model):
+    """A package for an order."""
+
+    __tablename__ = "packages"
+    weight = Column(db.Float(), nullable=False)
+    danger_class = Column(db.Integer(), nullable=False, default=0)
+    fragile = Column(db.Boolean(), nullable=False)
+    # Have one here as well, so the driver can leave notes about
+    # specific packages
+    driver_notes = Column(db.Text, nullable=True)
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Package({id})>'.format(id=self.id)
