@@ -187,7 +187,7 @@ class Conversation(SurrogatePK, Model):
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<Message({id})>'.format(id=self.id)
+        return '<Conversation({id})>'.format(id=self.id)
 
 
 class Message(SurrogatePK, Model):
