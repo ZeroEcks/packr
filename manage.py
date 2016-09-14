@@ -52,6 +52,24 @@ def test():
     return exit_code
 
 
+@manager.command
+def reset():
+    """Reset the stuff."""
+    import shutil
+    from packr.settings import TestConfig
+    try:
+        if os.path.exists('migrations'):
+            shutil.rmtree('migrations')
+        if os.path.isfile(TestConfig.DB_PATH):
+            os.remove(TestConfig.DB_PATH)
+        if os.path.isfile(DevConfig.DB_PATH):
+            os.remove(DevConfig.DB_PATH)
+    except Exception as e:
+        print(e.with_traceback())
+        return 1
+    return 0
+
+
 class Lint(Command):
     """Lint and check code style with flake8 and isort."""
 
