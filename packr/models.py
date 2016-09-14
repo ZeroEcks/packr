@@ -39,6 +39,7 @@ class User(SurrogatePK, Model):
     role = relationship('Role', lazy='joined')
 
     orders = db.relationship('Order', backref='user', lazy='joined')
+    conversations = relationship('Conversation', backref='user', lazy='joined')
 
     def __init__(self, email, password=None, **kwargs):
         """Create instance."""
@@ -155,6 +156,7 @@ class Package(SurrogatePK, Model):
 
     __tablename__ = "packages"
     weight = Column(db.Float(), nullable=False)
+    dimensions = Column(db.String(32), nullable=False)
     danger_class = Column(db.Integer(), nullable=False, default=0)
     fragile = Column(db.Boolean(), nullable=False)
     # Have one here as well, so the driver can leave notes about
@@ -169,3 +171,38 @@ class Package(SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<Package({id})>'.format(id=self.id)
+
+
+class Conversation(SurrogatePK, Model):
+    """A conversation for a user"""
+
+    __tablename__ = "conversations"
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    messages = relationship('Message', backref='conversation')
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Conversation({id})>'.format(id=self.id)
+
+
+class Message(SurrogatePK, Model):
+    """A message for a conversation"""
+
+    __tablename__ = "messages"
+    content = db.Column(db.Text, nullable=False)
+    time = Column(db.Time(), nullable=False)
+
+    conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Message({id})>'.format(id=self.id)
