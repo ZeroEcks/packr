@@ -32,5 +32,4 @@ class TestRegister:
         res = testapp.post_json(url_for('api.user_user_item'),
                                 params=data, expect_errors=True)
         print(res)
-        assert res.status_code != 201
-##        assert res.status_code == 400
+        assert res.status_code == 400
