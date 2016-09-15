@@ -10,7 +10,7 @@
         };
 
         self.login = function () {
-            DataService.post('/api/user/auth', self.user)
+            DataService.post('/auth', self.user)
                 .then(function (result) {
                     var parsedToken = AuthService.parseToken(result.access_token);
                     AuthService.setLocalUser(result.access_token, parsedToken.firstname);
