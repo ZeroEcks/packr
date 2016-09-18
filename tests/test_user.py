@@ -11,7 +11,7 @@ class TestRegister:
         data = {
             'firstname': 'ayy',
             'lastname': 'lmao',
-            'email': 'user666@email.com',
+            'email': 'user777@email.com',
             'password': '12345678'
         }
         # Goes to homepage
@@ -39,7 +39,7 @@ class TestRegister:
         data = {
             'firstname': 'ayy',
             'lastname': 'lmao',
-            'email': 'user666@email.com',
+            'email': 'user777@email.com',
             'password': '1234567'
         }
         # Goes to homepage
@@ -54,7 +54,7 @@ class TestLogin:
     def test_login_successful_returns_200(self, testapp):
         """Login successful"""
         data = {
-            'email': 'user666@email.com',
+            'email': 'user777@email.com',
             'password': '12345678'
             }
         res = testapp.post_json('/auth', params=data)
@@ -74,7 +74,7 @@ class TestLogin:
     def test_login_incorrect_password_returns_401(self, testapp):
         """Login unsuccessful"""
         data = {
-            'email': 'user666@email.com',
+            'email': 'user777@email.com',
             'password': 'wrongpassword'
             }
         res = testapp.post_json('/auth', params=data, expect_errors=True)
