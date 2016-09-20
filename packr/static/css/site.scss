@@ -18,7 +18,7 @@ html, body, .md-sidenav-left {
     height: 100%;
 }
 
-#home-body {
+#about-body {
 	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
@@ -28,7 +28,7 @@ html, body, .md-sidenav-left {
 	background-attachment: fixed;
 }
 
-#home-text {
+#about-text {
 	background-color: #9C27B0;
 	color: white;
 }
@@ -54,19 +54,47 @@ html, body, .md-sidenav-left {
 	color: white;
 }
 
-#temphome {
+/*
+This is for testing using the home page, delete after development
+*/
+
+#home-body {
+	background-image: url(../img/banner.jpg);
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+#about-body {
+	background-image: url(../img/banner.jpg);
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+#about-text {
+	background-color: #9C27B0;
+	color: white;
+}
+
+#about {
 	text-align: center;
 	margin-left: 200px;
 	margin-right: 200px;
 }
-#temphome h1 {
-	background-color: #9C27B0;
-	color: white;
+#about h1 {
+	color: #9C27B0;
 	text-decoration: bold;
-	font-size: 200%;
+	font-size: 400%;
 	display: inline;
 	padding: 5px;
 }
-#temphome p {
+#about p {
 	padding: 5px;
 }
