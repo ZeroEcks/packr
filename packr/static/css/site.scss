@@ -18,6 +18,55 @@ html, body, .md-sidenav-left {
     height: 100%;
 }
 
+#home-body {
+	background-image: url(../img/banner.jpg);
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+#home-text {
+	background-color: #9C27B0;
+	color: white;
+}
+
 #warning-toast .md-toast-content {
     background-color: #9C1A1C;
+}
+
+#toolbar-nav {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#footer {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0px;
+	background-color: #9C27B0;	
+	color: white;
+}
+
+#footer a {
+	color: white;
+}
+
+#temphome {
+	text-align: center;
+	margin-left: 200px;
+	margin-right: 200px;
+}
+#temphome h1 {
+	background-color: #9C27B0;
+	color: white;
+	text-decoration: bold;
+	font-size: 200%;
+	display: inline;
+	padding: 5px;
+}
+#temphome p {
+	padding: 5px;
 }
