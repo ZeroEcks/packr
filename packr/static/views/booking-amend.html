@@ -1,84 +1,85 @@
-	/* Access to this page only for logged in employees */
+<!-- Access to this page only for logged in employees -->
 	<div id="order-status">
 		<h1>Booking Status</h1>
-		<div id="oscolumns">
-			<div id="osfloat" class="ordercenter">
-				<div id="osfloat" class="orderdetails"><h3>Consignment#:</h3></div>
-				<div id="osfloat" class="orderdetails"><p>0123456A</p></div>
-				</br>
-				<div id="osfloat" class="orderdetails"><h3>Fragile:</h3></div>
-				<div id="osfloat" class="orderdetails">
-					<select>
-						<option value="no">No</option>
-						<option value="yes">Yes</option>
-					</select>
-				</div>
-				</br>
-				<div class=""><h3>Dangerous:</h3></div>
-				<div class="orderdetails">
-					<select>
-						<option value="none">No Dangerous Goods</option>
-						<option value="explosives">Explosives</option>
-						<option value="gases">Gases</option>
-						<option value="flammable">Flammable Substances</option>
-						<option value="oxidizing">Oxidizing Substances</option>
-						<option value="toxic">Toxic Substances</option>
-						<option value="corrosives">Corrosives</option>			
-						<option value="misc">Miscellaneous</option>
-					</select>
-				</div>
-				</br>
-			</div>
-			</br>
-			<div id="osfloat" class="osstatus">
-				<h3>Booking Status</h3>
-				<select>
-					<option value="booked">Booked</option>
-					<option value="picked_up">Picked Up</option>
-					<option value="wh_in">Warehouse (Scanned In)</option>
-					<option value="wh_stored">Warehouse (Storage)</option>
-					<option value="wh_out">Warehouse (Scanned Out)</option>
-					<option value="delivered">Delivered</option>
-				</select>				
-				<h3>Payment Type</h3>
-				<select>
-					<option value="account">Account</option>
-					<option value="credit">Credt Card</option>
-					<option value="cash">Cash</option>
-				</select>
-			</div>		
-		</div>	
-		<div id="oscolumns" class="oscomments">
-			<div class="ordercenter oscomments">
+		
+		<form action="" method="post">
+		
+			<h3>Consignment#:</h3>
+			<input type="search" name="connote_number" value="123456A"></input>
+			<input type="submit" value="Search"></input>
+		</form>		
+		<form action="" method="post">
+		
+			<h3>Booking Status</h3>
+			<select name="booking_status">
+				<option value="booked">Booked</option>
+				<option value="picked_up">Picked Up</option>
+				<option value="wh_in">Warehouse (Scanned In)</option>
+				<option value="wh_stored">Warehouse (Storage)</option>
+				<option value="wh_out">Warehouse (Scanned Out)</option>
+				<option value="delivered">Delivered</option>
+			</select>
+						
+			<h3>Service Type</h3>
+			<select name="service">
+				<option value="standard">Standard</option>
+				<option value="express">Express</option>
+				<option value="overnight">Overnight</option>
+				<option value="dangerous">Dangerous Goods</option>
+			</select>
+						
+			<h3>Dangerous:</h3>
+			<select name="dangerous">
+				<option value="none">No Dangerous Goods</option>
+				<option value="explosives">Explosives</option>
+				<option value="gases">Gases</option>
+				<option value="flammable">Flammable Substances</option>
+				<option value="oxidizing">Oxidizing Substances</option>
+				<option value="toxic">Toxic Substances</option>
+				<option value="corrosives">Corrosives</option>			
+				<option value="misc">Miscellaneous</option>
+			</select>
+			
+			<h3>Fragile:</h3>
+			<select name="fragile">
+				<option value="no">No</option>
+				<option value="yes">Yes</option>
+			</select>				
+			
+			<h3>Payment Type</h3>
+			<select name="payment_type">
+				<option value="account">Account</option>
+				<option value="credit">Credt Card</option>
+				<option value="cash">Cash</option>
+			</select>
+			
 			<h3>Pickup Date</h3>
-			<input type="date" name="pickupdate">
-			</div>
+			<input type="date" name="pickup_date">
+			
 			<h3>Delivery Date</h3>
-			<input type="date" name="deliverydate">
-		</div>
-		<div id="oscolumns" class="osaddress">
-			<div id="acommentfloat" class="ordercenter oscomments">
-				<h3>Admin Comments</h3>
-				<textarea rows="4" cols="30" name="admin_comment">Insert some admin comments, just broke package 1, a carton of wine fell off the back...</textarea>
-			</div>
-			<div id="osucomment">
-				<h3>Customer Comments</h3>
-				<textarea rows="4" cols="30" name="user_comment">Insert some customer comments, like watch out for the dog, or leave the package in the neighbours pool...</textarea>
-			</div>
-		</div>
-		<div id="oscolumns" class="osaddress">
-			<div class="ordercenter oscomments">
+			<input type="date" name="delivery_date">
+			
+			<h3>Admin Comments</h3>
+			<textarea rows="4" cols="30" name="admin_comment">Insert some admin comments, just broke package 1, a carton of wine fell off the back...</textarea>
+			
+			<h3>Customer Comments</h3>
+			<textarea rows="4" cols="30" name="user_comment">Insert some customer comments, like watch out for the dog, or leave the package in the neighbours pool...</textarea>
+			
 			<h3>Pick Up Address</h3>
-			<textarea rows="5" cols="30" name="pickupadd">Vendor Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>
-			</div>
+			<textarea rows="5" cols="30" name="pickup_address">Vendor Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>
+			
 			<h3>Delivery Address</h3>
-			<textarea rows="5" cols="30" name="pickupadd">Customer Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>			
-		</div>
-		<div id="packageoffset">
-			<div id="osfloat"><h4>Total Weight: </h4></div><div id="osfloat"><p>37 kg</p></div><div id="osfloat"><h4>   Total Volume: </h4></div><div id="osfloat"><p>0.8 m3</p></div>
-			<h4>Pacakage 1: </h4>
-			<div id="osfloat"><h5>Weight: </h5></div><div id="osfloat"><p>25 kg</p></div><div id="osfloat"><h5>   Volume: </h5></div><div id="osfloat"><p>0.5 m3</p></div>
-			<h4>Pacakage 2: </h4>
-			<div id="osfloat"><h5>Weight: </h5></div><div id="osfloat"><p>12 kg</p></div><div id="osfloat"><h5>   Volume: </h5></div><div id="osfloat"><p>0.3 m3</p></div>
-		</div>
+			<textarea rows="5" cols="30" name="delivery_address">Customer Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>
+			
+			<br>
+			
+			<div id="inlineblock"><h4>Total Weight: </h4></div><div id="inlineblock"><p>37 kg</p></div><div id="inlineblock"><h4>   Total Volume: </h4></div><div id="inlineblock"><p>0.8 m3</p></div>
+			<h4>Package 1: </h4>
+			<div id="inlineblock"><h5>Weight: </h5></div><div id="inlineblock"><Input type="number" name="packone_weight" value="25"> kg</input></div><div id="inlineblock"><h5>   Volume: </h5></div><div id="inlineblock"><input type="number" name="packone_volume" value="0.5"> m3</input></div>
+			<h4>Package 2: </h4>
+			<div id="inlineblock"><h5>Weight: </h5></div><div id="inlineblock"><Input type="number" name="packtwo_weight" value="12"> kg</input></div><div id="inlineblock"><h5>   Volume: </h5></div><div id="inlineblock"><Input type="number" name="packtwo_volume" value="0.3"> m3</input></div>
+			
+			<br>
+			<input type="submit" value="Submit Changes"></input>
+		</form>
 	</div>
