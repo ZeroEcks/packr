@@ -34,11 +34,10 @@ class User(SurrogatePK, Model):
     lastname = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=True)
     business_account = db.Column(db.Boolean, nullable=True, default=False)
-
     role_id = Column(db.Integer(), db.ForeignKey('roles.id'))
     role = relationship('Role', lazy='joined')
 
-    orders = db.relationship('Order', backref='user', lazy='joined')
+    orders = db.relationship('Order', backref='user')
     conversations = relationship('Conversation', backref='user', lazy='joined')
 
     def __init__(self, email, password=None, **kwargs):
@@ -69,6 +68,50 @@ class User(SurrogatePK, Model):
         return '<User({username!r})>'.format(username=self.username)
 
 
+# Due to a limitation in SQLAlchemy, we can't use a User for this.
+class Driver(SurrogatePK, Model):
+    """A driver for the company."""
+
+    __tablename__ = 'drivers'
+    email = Column(db.String(80), unique=True, nullable=False)
+    password = Column(db.String(128), nullable=True)
+    created_at = Column(db.DateTime,
+                        nullable=False,
+                        default=dt.datetime.utcnow)
+    firstname = Column(db.String(30), nullable=True)
+    lastname = Column(db.String(30), nullable=True)
+
+    orders = db.relationship('Order', backref='driver')
+
+    def __init__(self, email, password=None, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self,
+                          email=email,
+                          **kwargs)
+        if password:
+            self.set_password(password)
+        else:
+            self.password = None
+
+    def set_password(self, password):
+        """Set password."""
+        self.password = bcrypt.generate_password_hash(password)
+
+    def verify_password(self, value):
+        """Check password."""
+        return bcrypt.check_password_hash(self.password, value)
+
+    @property
+    def full_name(self):
+        """Full user name."""
+        return '{0} {1}'.format(self.firstname, self.lastname)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Driver({full_name})>'.format(
+            full_name='{0} {1}'.format(self.firstname, self.lastname))
+
+
 class Order(SurrogatePK, Model):
     """An order."""
 
@@ -82,8 +125,7 @@ class Order(SurrogatePK, Model):
     driver_notes = Column(db.Text, nullable=True)
     cost = Column(db.Float, nullable=False)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
-    type_id = Column(db.Integer, db.ForeignKey('delivery_types.id'))
-    driver_id = Column(db.Integer, db.ForeignKey('users.id'))
+    driver_id = Column(db.Integer, db.ForeignKey('drivers.id'))
 
     payment = relationship("Payment",
                            backref=db.backref("order", uselist=False))
@@ -126,6 +168,7 @@ class Delivery(SurrogatePK, Model):
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
     driver_notes = Column(db.Text, nullable=True)
     signature = Column(db.Boolean, nullable=False, default=False)
+    type_id = Column(db.Integer, db.ForeignKey('delivery_types.id'))
 
     package = relationship("Package", backref="delivery")
     delivery_type = relationship("DeliveryType", uselist=False)
