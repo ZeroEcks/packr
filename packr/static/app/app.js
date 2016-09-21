@@ -46,6 +46,9 @@
                     'requiresLogin': requiresLogin
                 }
             })
+            .when('/services', {
+                templateUrl: 'static/views/services.html'
+            })
             .otherwise({
                 templateUrl: 'static/views/404.html'
             });
