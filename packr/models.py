@@ -77,19 +77,20 @@ class Order(SurrogatePK, Model):
                         nullable=False,
                         default=dt.datetime.utcnow)
     weight = Column(db.Float(), nullable=False)
-    status = relationship("OrderStatus", backref='order')
     details = Column(db.Text, nullable=True)
     notes = Column(db.Text, nullable=True)
     driver_notes = Column(db.Text, nullable=True)
     cost = Column(db.Float, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-
-    type_id = Column(db.Integer(), db.ForeignKey('delivery_types.id'))
-    delivery_type = relationship("DeliveryType", uselist=False)
+    user_id = Column(db.Integer, db.ForeignKey('users.id'))
+    type_id = Column(db.Integer, db.ForeignKey('delivery_types.id'))
+    driver_id = Column(db.Integer, db.ForeignKey('users.id'))
 
     payment = relationship("Payment",
                            backref=db.backref("order", uselist=False))
     package = relationship("Package", backref="order")
+    status = relationship("OrderStatus", backref='order')
+    delivery = relationship("Delivery", backref='order')
+    issue = relationship("Issue", backref='order')
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -106,7 +107,7 @@ class OrderStatus(SurrogatePK, Model):
     __tablename__ = 'order_statuses'
     status = Column(db.String(80), nullable=False)
     time = Column(db.Time(), nullable=False)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -116,6 +117,26 @@ class OrderStatus(SurrogatePK, Model):
         """Represent instance as a unique string."""
         return '<OrderStatus({status}, {time})>'.format(status=self.status,
                                                         time=self.time)
+
+
+class Delivery(SurrogatePK, Model):
+    """A delivery for an order."""
+
+    __tablename__ = 'deliveries'
+    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+    driver_notes = Column(db.Text, nullable=True)
+    signature = Column(db.Boolean, nullable=False, default=False)
+
+    package = relationship("Package", backref="delivery")
+    delivery_type = relationship("DeliveryType", uselist=False)
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Delivery({id})>'.format(id=self.id)
 
 
 class DeliveryType(SurrogatePK, Model):
@@ -132,6 +153,23 @@ class DeliveryType(SurrogatePK, Model):
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<DeliveryType({name})>'.format(name=self.type_name)
+
+
+class Issue(SurrogatePK, Model):
+    """An issue for an order."""
+
+    __tablename__ = "issues"
+    # Can't call it name due to table name stored as name
+    issue = Column(db.Text, nullable=False)
+    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Issue({issue})>'.format(issue=self.issue)
 
 
 class Payment(SurrogatePK, Model):
@@ -159,10 +197,8 @@ class Package(SurrogatePK, Model):
     dimensions = Column(db.String(32), nullable=False)
     danger_class = Column(db.Integer(), nullable=False, default=0)
     fragile = Column(db.Boolean(), nullable=False)
-    # Have one here as well, so the driver can leave notes about
-    # specific packages
-    driver_notes = Column(db.Text, nullable=True)
-    order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
+    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+    delivery_id = Column(db.Integer, db.ForeignKey('deliveries.id'))
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -177,7 +213,7 @@ class Conversation(SurrogatePK, Model):
     """A conversation for a user"""
 
     __tablename__ = "conversations"
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = Column(db.Integer, db.ForeignKey('users.id'))
 
     messages = relationship('Message', backref='conversation')
 
@@ -194,10 +230,10 @@ class Message(SurrogatePK, Model):
     """A message for a conversation"""
 
     __tablename__ = "messages"
-    content = db.Column(db.Text, nullable=False)
+    content = Column(db.Text, nullable=False)
     time = Column(db.Time(), nullable=False)
 
-    conversation_id = db.Column(db.Integer, db.ForeignKey('conversations.id'))
+    conversation_id = Column(db.Integer, db.ForeignKey('conversations.id'))
 
     def __init__(self, name, **kwargs):
         """Create instance."""
