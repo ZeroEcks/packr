@@ -1,0 +1,84 @@
+	/* Access to this page only for logged in employees */
+	<div id="order-status">
+		<h1>Booking Status</h1>
+		<div id="oscolumns">
+			<div id="osfloat" class="ordercenter">
+				<div id="osfloat" class="orderdetails"><h3>Consignment#:</h3></div>
+				<div id="osfloat" class="orderdetails"><p>0123456A</p></div>
+				</br>
+				<div id="osfloat" class="orderdetails"><h3>Fragile:</h3></div>
+				<div id="osfloat" class="orderdetails">
+					<select>
+						<option value="no">No</option>
+						<option value="yes">Yes</option>
+					</select>
+				</div>
+				</br>
+				<div class=""><h3>Dangerous:</h3></div>
+				<div class="orderdetails">
+					<select>
+						<option value="none">No Dangerous Goods</option>
+						<option value="explosives">Explosives</option>
+						<option value="gases">Gases</option>
+						<option value="flammable">Flammable Substances</option>
+						<option value="oxidizing">Oxidizing Substances</option>
+						<option value="toxic">Toxic Substances</option>
+						<option value="corrosives">Corrosives</option>			
+						<option value="misc">Miscellaneous</option>
+					</select>
+				</div>
+				</br>
+			</div>
+			</br>
+			<div id="osfloat" class="osstatus">
+				<h3>Booking Status</h3>
+				<select>
+					<option value="booked">Booked</option>
+					<option value="picked_up">Picked Up</option>
+					<option value="wh_in">Warehouse (Scanned In)</option>
+					<option value="wh_stored">Warehouse (Storage)</option>
+					<option value="wh_out">Warehouse (Scanned Out)</option>
+					<option value="delivered">Delivered</option>
+				</select>				
+				<h3>Payment Type</h3>
+				<select>
+					<option value="account">Account</option>
+					<option value="credit">Credt Card</option>
+					<option value="cash">Cash</option>
+				</select>
+			</div>		
+		</div>	
+		<div id="oscolumns" class="oscomments">
+			<div class="ordercenter oscomments">
+			<h3>Pickup Date</h3>
+			<input type="date" name="pickupdate">
+			</div>
+			<h3>Delivery Date</h3>
+			<input type="date" name="deliverydate">
+		</div>
+		<div id="oscolumns" class="osaddress">
+			<div id="acommentfloat" class="ordercenter oscomments">
+				<h3>Admin Comments</h3>
+				<textarea rows="4" cols="30" name="admin_comment">Insert some admin comments, just broke package 1, a carton of wine fell off the back...</textarea>
+			</div>
+			<div id="osucomment">
+				<h3>Customer Comments</h3>
+				<textarea rows="4" cols="30" name="user_comment">Insert some customer comments, like watch out for the dog, or leave the package in the neighbours pool...</textarea>
+			</div>
+		</div>
+		<div id="oscolumns" class="osaddress">
+			<div class="ordercenter oscomments">
+			<h3>Pick Up Address</h3>
+			<textarea rows="5" cols="30" name="pickupadd">Vendor Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>
+			</div>
+			<h3>Delivery Address</h3>
+			<textarea rows="5" cols="30" name="pickupadd">Customer Name&#13;&#10;Unit, Street&#13;&#10;Suburb&#13;&#10;State</textarea>			
+		</div>
+		<div id="packageoffset">
+			<div id="osfloat"><h4>Total Weight: </h4></div><div id="osfloat"><p>37 kg</p></div><div id="osfloat"><h4>   Total Volume: </h4></div><div id="osfloat"><p>0.8 m3</p></div>
+			<h4>Pacakage 1: </h4>
+			<div id="osfloat"><h5>Weight: </h5></div><div id="osfloat"><p>25 kg</p></div><div id="osfloat"><h5>   Volume: </h5></div><div id="osfloat"><p>0.5 m3</p></div>
+			<h4>Pacakage 2: </h4>
+			<div id="osfloat"><h5>Weight: </h5></div><div id="osfloat"><p>12 kg</p></div><div id="osfloat"><h5>   Volume: </h5></div><div id="osfloat"><p>0.3 m3</p></div>
+		</div>
+	</div>

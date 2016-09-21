@@ -55,10 +55,9 @@ html, body, .md-sidenav-left {
 }
 
 /*
-This is for testing using the home page, delete after development
+#home-body is for testing with the home page, delete after development
 */
-
-#home-body {
+/*#home-body {
 	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
@@ -66,8 +65,7 @@ This is for testing using the home page, delete after development
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-}
-
+}*/
 #about-body {
 	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
@@ -77,7 +75,31 @@ This is for testing using the home page, delete after development
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
+#services-body {
+	background-image: url(../img/banner.jpg);
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+#about p {
+	padding: 5px;
+}
 
+#services h3{
+	padding-top: 5px;
+}
+#services h2{
+	font-size: 200%;
+}
+#services p {
+	padding-bottom: 5px;
+}
+
+
+/* make these into classes */
 #about-text {
 	background-color: #9C27B0;
 	color: white;
@@ -88,6 +110,12 @@ This is for testing using the home page, delete after development
 	margin-left: 200px;
 	margin-right: 200px;
 }
+#services {
+	text-align: center;
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
 #about h1 {
 	color: #9C27B0;
 	text-decoration: bold;
@@ -95,6 +123,60 @@ This is for testing using the home page, delete after development
 	display: inline;
 	padding: 5px;
 }
-#about p {
-	padding: 5px;
+#services h1{
+	color: #9C27B0;
+	text-decoration: bold;
+	font-size: 400%;
+	display: inline;
+	padding: 5px;	
+}
+
+#order-status {
+	margin-left: auto;
+	margin-right: auto;
+}
+#order-status h1 {
+	margin-left: 40%;
+	margin-right: auto;
+}
+#order-status h4, h5 {
+	white-space: pre;
+}
+#order-status h4 {
+	margin-bottom: -10px;
+}
+#oscolumns {
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+	column-count: 2;
+	-webkit-column-gap: 100px;
+	-moz-column-gap: 100px;
+	column-gap: 100px;	
+}
+#osfloat {
+	display: inline-block;
+}
+#acommentfloat {
+	
+}
+#osucomment {	
+}
+#packageoffset {
+	margin-left: 9%;
+}
+.osstatus {
+	padding-bottom: 50px;
+}
+.orderdetails {
+	margin-bottom: -10px;
+	margin-top: 0px;
+}
+.ordercenter {
+	margin-left: 20%;
+}
+.oscomments {
+	margin-top: -18px;
+}
+.osaddress {
+	margin-top: 20px;
 }
