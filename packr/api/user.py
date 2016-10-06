@@ -18,7 +18,7 @@ user = api.model('User', {
     'email': fields.String(required=True,
                            description='Login email'),
     'password': fields.Integer(required=False,
-                               description='The login passord'),
+                               description='The login password'),
 })
 
 

@@ -173,9 +173,9 @@ class Delivery(SurrogatePK, Model):
     package = relationship("Package", backref="delivery")
     delivery_type = relationship("DeliveryType", uselist=False)
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self,  **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
