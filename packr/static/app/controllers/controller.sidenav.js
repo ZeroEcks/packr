@@ -16,6 +16,22 @@
             $location.path('/services');
         };
 
+        self.goContact = function () {
+            $location.path('/contact');
+        };
+
+        self.goQuote = function () {
+
+        };
+
+        self.goTrack = function () {
+
+        };
+
+        self.goBook = function () {
+
+        };
+
         self.goHome = function () {
             $location.path('/');
         };
