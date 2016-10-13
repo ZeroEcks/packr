@@ -19,13 +19,10 @@ html, body, .md-sidenav-left {
 }
 
 #about-body {
-	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
 	background-size: cover;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background: url(../img/banner.jpg) no-repeat fixed top center;
 }
 
 #about-text {
@@ -45,7 +42,7 @@ html, body, .md-sidenav-left {
 #footer {
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 	background-color: #9C27B0;	
 	color: white;
 }
@@ -55,22 +52,16 @@ html, body, .md-sidenav-left {
 }
 
 #about-body {
-	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
 	background-size: cover;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background: url(../img/banner.jpg) no-repeat fixed top center;
 }
 #services-body {
-	background-image: url(../img/banner.jpg);
 	-moz-background-size: cover;
 	-webkit-background-size: cover;
 	background-size: cover;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+	background: url(../img/banner.jpg) no-repeat fixed top center;
 }
 #about p {
 	padding: 5px;
@@ -104,17 +95,10 @@ html, body, .md-sidenav-left {
 	margin-right: 200px;
 }
 
-#about h1 {
+h1 {
 	color: #9C27B0;
-	text-decoration: bold;
+	font-weight: bold;
 	font-size: 400%;
 	display: inline;
 	padding: 5px;
-}
-#services h1{
-	color: #9C27B0;
-	text-decoration: bold;
-	font-size: 400%;
-	display: inline;
-	padding: 5px;	
 }
