@@ -46,6 +46,24 @@
                     'requiresLogin': requiresLogin
                 }
             })
+            .when('/about', {
+                templateUrl: 'static/views/about.html'
+            })
+            .when('/book', {
+                templateUrl: 'static/views/services.html'
+            })
+            .when('/book-amend', {
+                templateUrl: 'static/views/booking-amend.html',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/quote', {
+                templateUrl: 'static/views/services.html'
+            })
+            .when('/track', {
+                templateUrl: 'static/views/services.html'
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })
