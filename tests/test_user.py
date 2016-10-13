@@ -48,6 +48,7 @@ class TestRegister:
         print(res)
         assert res.status_code == 400
 
+
 class TestLogin:
     """Login tests"""
 
@@ -56,7 +57,7 @@ class TestLogin:
         data = {
             'email': 'user999@email.com',
             'password': '12345678'
-            }
+        }
         res = testapp.post_json('/auth', params=data)
         print(res)
         assert res.status_code == 200
@@ -66,7 +67,7 @@ class TestLogin:
         data = {
             'email': 'notindb@email.com',
             'password': 'password'
-            }
+        }
         res = testapp.post_json('/auth', params=data, expect_errors=True)
         print(res)
         assert res.status_code == 401
@@ -76,7 +77,7 @@ class TestLogin:
         data = {
             'email': 'user999@email.com',
             'password': 'wrongpassword'
-            }
+        }
         res = testapp.post_json('/auth', params=data, expect_errors=True)
         print(res)
         assert res.status_code == 401
