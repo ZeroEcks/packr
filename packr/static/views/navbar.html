@@ -1,7 +1,7 @@
 <md-toolbar md-whiteframe="1" ng-cloak>
     <div class="md-toolbar-tools">
         <md-button ng-click="toggleLeft()" show-md hide-gt-sm><md-icon>menu</md-icon></md-button>
-		<md-menu>
+        <md-menu>
             <md-button ng-click="$mdOpenMenu($event)"><md-icon>person</md-icon></md-button>
             <md-menu-content width="4">
                 <md-menu-item ng-if="$ctrl.userLoggedIn() == false">
