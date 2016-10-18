@@ -16,6 +16,10 @@
             $location.path('/services');
         };
 
+        self.goWhyUs = function () {
+            $location.path('/why-us');
+        };
+
         self.goContact = function () {
             $location.path('/contact');
         };

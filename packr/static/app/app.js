@@ -70,6 +70,9 @@
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })
+            .when('/why-us', {
+                templateUrl: 'static/views/why-us.html'
+            })
             .otherwise({
                 templateUrl: 'static/views/404.html'
             });
