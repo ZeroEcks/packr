@@ -21,15 +21,15 @@
         };
 
         self.goQuote = function () {
-
+            $location.path('/quote');
         };
 
         self.goTrack = function () {
-
+            $location.path('/track');
         };
 
         self.goBook = function () {
-
+            $location.path('/book');
         };
 
         self.goHome = function () {

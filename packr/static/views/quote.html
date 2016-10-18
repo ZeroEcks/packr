@@ -1,25 +1,19 @@
-<!-- Access to this page only for logged in employees -->
+<!-- This page should send an email to the admin, with the submitted data -->
 <md-content layout-padding>
-	<h2>Booking Status</h2>
-
+	<h2>Request a Quote</h2>
 	<form action="" method="post">
 
-		<h3>Consignment#:</h3>
-		<input type="search" name="connote_number" value="123456A">
-		<input type="submit" value="Search">
+		<h3>Account number (if available):</h3>
+		<input type="number">
 
-	</form>
-	<form action="" method="post">
-
-		<h3>Booking Status</h3>
-		<select name="booking_status">
-			<option value="booked">Booked</option>
-			<option value="picked_up">Picked Up</option>
-			<option value="wh_in">Warehouse (Scanned In)</option>
-			<option value="wh_stored">Warehouse (Storage)</option>
-			<option value="wh_out">Warehouse (Scanned Out)</option>
-			<option value="delivered">Delivered</option>
-		</select>
+		<h3>Business Name</h3>
+		<input type="text" name="quoteName" placeholder="Business name">
+		<p>Contact</p>
+		<input type="text" name="quoteContact" placeholder="Contact">
+		<p>Phone</p>
+		<input type="number" name="quotePhone" placeholder="Phone">
+		<p>Email</p>
+		<input type="email" name="quoteEmail" placeholder="user@email.com">
 
 		<h3>Service Type</h3>
 		<select name="service">
@@ -29,58 +23,8 @@
 			<option value="dangerous">Dangerous Goods</option>
 		</select>
 
-		<h3>Assigned Driver</h3>
-		<input type="text" name="driver">
+		<h3>Pickup Address</h3>
 
-		<h3>Dangerous:</h3>
-		<select name="dangerous">
-			<option value="none">No Dangerous Goods</option>
-			<option value="explosives">Explosives</option>
-			<option value="gases">Gases</option>
-			<option value="flammable">Flammable Substances</option>
-			<option value="oxidizing">Oxidizing Substances</option>
-			<option value="toxic">Toxic Substances</option>
-			<option value="corrosives">Corrosives</option>
-			<option value="misc">Miscellaneous</option>
-		</select>
-
-		<h3>Fragile:</h3>
-		<select name="fragile">
-			<option value="no">No</option>
-			<option value="yes">Yes</option>
-		</select>
-
-		<h3>Payment Type</h3>
-		<select name="payment_type">
-			<option value="account">Account</option>
-			<option value="credit">Credt Card</option>
-			<option value="cash">Cash</option>
-		</select>
-
-		<h3>Pickup Date</h3>
-		<input type="date" name="pickupDate" placeholder="dd/mm/yyyy">
-		<h3>Pickup Time</h3>
-		<input type="time" name="pickupTime" placeholder="00:00 AM/PM">
-
-		<h3>Delivery Date</h3>
-		<input type="date" name="deliveryDate" placeholder="dd/mm/yyyy">
-		<h3>Delivery Time</h3>
-		<input type="time" name="deliveryTime" placeholder="00:00 AM/PM">
-
-		<h3>Admin Comments</h3>
-		<textarea rows="4" cols="30" name="admin_comment">Insert some admin comments, just broke package 1, a carton of wine fell off the back...</textarea>
-
-		<h3>Customer Comments</h3>
-		<textarea rows="4" cols="30" name="user_comment">Insert some customer comments, like watch out for the dog, or leave the package in the neighbours pool...</textarea>
-
-		<h3>Pick Up Address</h3>
-
-		<p>Business name</p>
-		<input type="text" name="pickupName" placeholder="Business name">
-		<p>Contact</p>
-		<input type="text" name="pickupContact" placeholder="Contact">
-		<p>Phone</p>
-		<input type="number" name="pickupPhone" placeholder="Phone">
 		<p>Street Number and Name</p>
 		<input type="text" name="pickupStreet" placeholder="Street Number and Name">
 		<p>Suburb</p>
@@ -92,12 +36,6 @@
 
 		<h3>Delivery Address</h3>
 
-		<p>Business name</p>
-		<input type="text" name="deliveryName" placeholder="Business name">
-		<p>Contact</p>
-		<input type="text" name="deliveryContact" placeholder="Contact">
-		<p>Phone</p>
-		<input type="number" name="deliveryPhone" placeholder="Phone">
 		<p>Street Number and Name</p>
 		<input type="text" name="deliveryStreet" placeholder="Street Number and Name">
 		<p>Suburb</p>
@@ -106,6 +44,18 @@
 		<input type="text" name="deliveryState" placeholder="State">
 		<p>Post Code</p>
 		<input type="number" name="deliveryPostcode" placeholder="Post Code">
+
+		<h3>Dangerous Goods Type:</h3>
+		<select name="dangerous">
+			<option value="none">No Dangerous Goods</option>
+			<option value="explosives">Explosives</option>
+			<option value="gases">Gases</option>
+			<option value="flammable">Flammable Substances</option>
+			<option value="oxidizing">Oxidizing Substances</option>
+			<option value="toxic">Toxic Substances</option>
+			<option value="corrosives">Corrosives</option>
+			<option value="misc">Miscellaneous</option>
+		</select>
 
 		<h3>Packages:</h3>
 		<table name="packages">
@@ -177,8 +127,6 @@
 			</tr>
 		</table>
 
-		<br>
-		<input type="submit" value="Submit Changes">
-
+		<input type="submit" value="Request a Quote">
 	</form>
 </md-content>

@@ -50,7 +50,10 @@
                 templateUrl: 'static/views/about.html'
             })
             .when('/book', {
-                templateUrl: 'static/views/services.html'
+                templateUrl: 'static/views/booking.html',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
             })
             .when('/book-amend', {
                 templateUrl: 'static/views/booking-amend.html',
@@ -59,10 +62,10 @@
                 }
             })
             .when('/quote', {
-                templateUrl: 'static/views/services.html'
+                templateUrl: 'static/views/quote.html'
             })
             .when('/track', {
-                templateUrl: 'static/views/services.html'
+                templateUrl: 'static/views/track.html'
             })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
