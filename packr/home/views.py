@@ -6,5 +6,4 @@ home = Blueprint('home', __name__)
 @home.route('/', defaults={'path': ''})
 @home.route('/<path:path>')
 def index(path):
-    print('angularhit')
     return render_template('index.html')
