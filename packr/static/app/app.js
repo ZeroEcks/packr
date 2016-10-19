@@ -62,7 +62,7 @@
                 }
             })
             .when('/quote', {
-                templateUrl: 'static/views/quote.html'
+                template: '<quote></quote>'
             })
             .when('/track', {
                 templateUrl: 'static/views/track.html'
