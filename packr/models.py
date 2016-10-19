@@ -12,9 +12,9 @@ class Role(SurrogatePK, Model):
     __tablename__ = 'roles'
     role_name = Column(db.String(80), unique=True, nullable=False)
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
@@ -266,9 +266,9 @@ class DeliveryType(SurrogatePK, Model):
     # Can't call it name due to table name stored as name
     type_name = Column(db.String(12), nullable=False)
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
@@ -285,7 +285,7 @@ class Issue(SurrogatePK, Model):
 
     def __init__(self, name, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
@@ -299,9 +299,9 @@ class Payment(SurrogatePK, Model):
     stripe_id = Column(db.Integer, nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'))
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
@@ -329,36 +329,19 @@ class Package(SurrogatePK, Model):
         return '<Package({id})>'.format(id=self.id)
 
 
-class Conversation(SurrogatePK, Model):
-    """A conversation for a user"""
-
-    __tablename__ = "conversations"
-    user_id = Column(db.Integer, db.ForeignKey('users.id'))
-
-    messages = relationship('Message', backref='conversation')
-
-    def __init__(self, name, **kwargs):
-        """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
-
-    def __repr__(self):
-        """Represent instance as a unique string."""
-        return '<Conversation({id})>'.format(id=self.id)
-
-
 class Message(SurrogatePK, Model):
     """A message for a conversation"""
 
     __tablename__ = "messages"
-    content = Column(db.Text, nullable=False)
-    time = Column(db.Time(), nullable=False)
+    email = db.Column(db.String(80), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    done = db.Column(db.Boolean, nullable=False, default=False)
+    time = Column(db.DateTime(), nullable=False)
 
-    conversation_id = Column(db.Integer, db.ForeignKey('conversations.id'))
-
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<Message({id})>'.format(id=self.id)
+        return '<Message({id}, {done})>'.format(id=self.id, done=self.done)

@@ -7,6 +7,7 @@ from .book import api as book_api
 from .lookup import api as lookup_api
 from .update import api as update_api
 from .orders import api as orders_api
+from .contact import api as contact_api
 
 blueprint = Blueprint('api', __name__)
 api = Api(blueprint,
@@ -20,3 +21,4 @@ api.add_namespace(book_api)
 api.add_namespace(lookup_api)
 api.add_namespace(update_api)
 api.add_namespace(orders_api)
+api.add_namespace(contact_api)
