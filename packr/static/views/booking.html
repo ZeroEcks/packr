@@ -1,0 +1,243 @@
+<!-- This page should only be available to customers that are logged in -->
+<md-content layout-padding>
+	<div layout="row" layout-align="center">
+	    <h2>Book a Pickup</h2>
+    </div>
+	<form flex ng-submit="submit()">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Service Type</label>
+                <md-select name="type" ng-model="booking.type" required>
+                    <md-option value="standard">Standard</md-option>
+                    <md-option value="express">Express</md-option>
+                    <md-option value="overnight">Overnight</md-option>
+                    <md-option value="dangerous">Dangerous Goods</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm ng-if="booking.type === 'dangerous'">
+                <label>Dangerous Goods Type</label>
+                <md-select name="type" ng-model="booking.dangerous" required>
+                    <md-option value="none">No Dangerous Goods</md-option>
+                    <md-option value="explosives">Explosives</md-option>
+                    <md-option value="gases">Gases</md-option>
+                    <md-option value="flammable">Flammable Substances</md-option>
+                    <md-option value="oxidizing">Oxidizing Substances</md-option>
+                    <md-option value="toxic">Toxic Substances</md-option>
+                    <md-option value="corrosives">Corrosives</md-option>
+                    <md-option value="misc">Miscellaneous</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Requires Pickup?</label>
+            <md-select name="type" ng-model="booking.requirePickup" required>
+                <md-option value="no">No</md-option>
+                <md-option value="yes">Yes</md-option>
+            </md-select>
+        </md-input-container>
+
+        <div ng-if="booking.requirePickup === 'yes'">
+            <br><br>
+            <label>Pickup Address</label>
+
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Business Name</label>
+                    <input ng-model="booking.pickup.businessName">
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Contact Name</label>
+                    <input ng-model="booking.pickup.contactName" required>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Phone</label>
+                    <input name="phone" ng-model="booking.pickup.phone" ng-pattern="/^[0-9]{4} [0-9]{3} [0-9]{3}$/" required>
+                    <div class="hint">#### ### ###</div>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Email</label>
+                    <input name="email" ng-model="booking.pickup.email" ng-pattern="/^.+@.+\..+$/" required>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Street Name and Number</label>
+                    <input name="text" ng-model="booking.pickup.street" required>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Suburb</label>
+                    <input name="text" ng-model="booking.pickup.suburb" required>
+                </md-input-container>
+            </div>
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>State</label>
+                    <md-select name="type" ng-model="booking.pickup.state" required>
+                        <md-option value="act">ACT</md-option>
+                        <md-option value="new_south_wales">New South Wales</md-option>
+                        <md-option value="queensland">Queensland</md-option>
+                        <md-option value="victoria">Victoria</md-option>
+                        <md-option value="south_australia">South Australia</md-option>
+                        <md-option value="western_australia">Western Australia</md-option>
+                        <md-option value="tasmania">Tasmania</md-option>
+                        <md-option value="northern_territory">Northern Territory</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Post Code</label>
+                    <input name="postalCode" ng-model="booking.pickup.postCode" ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
+                </md-input-container>
+            </div>
+
+            <div layout-gt-sm="row">
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Pickup Date</label>
+                    <md-datepicker ng-model="booking.pickup.date" md-placeholder="Enter date" required></md-datepicker>
+                </md-input-container>
+                <md-input-container class="md-block" flex-gt-sm>
+                    <label>Pickup Time</label>
+                    <input type="time" name="booking.pickup.time" placeholder="00:00 AM/PM" required>
+                </md-input-container>
+            </div>
+        </div>
+
+        <br><br>
+
+		<label>Delivery Address</label>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Business Name</label>
+                <input ng-model="booking.delivery.businessName">
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Contact Name</label>
+                <input ng-model="booking.delivery.contactName" required>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Phone</label>
+                <input name="phone" ng-model="booking.delivery.phone" ng-pattern="/^[0-9]{4} [0-9]{3} [0-9]{3}$/" required>
+                <div class="hint">#### ### ###</div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Email</label>
+                <input name="email" ng-model="booking.delivery.email" ng-pattern="/^.+@.+\..+$/" required>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Street Name and Number</label>
+                <input name="text" ng-model="booking.delivery.street" required>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Suburb</label>
+                <input name="text" ng-model="booking.delivery.suburb" required>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>State</label>
+                <md-select name="type" ng-model="booking.delivery.state" required>
+                    <md-option value="act">ACT</md-option>
+                    <md-option value="new_south_wales">New South Wales</md-option>
+                    <md-option value="queensland">Queensland</md-option>
+                    <md-option value="victoria">Victoria</md-option>
+                    <md-option value="south_australia">South Australia</md-option>
+                    <md-option value="western_australia">Western Australia</md-option>
+                    <md-option value="tasmania">Tasmania</md-option>
+                    <md-option value="northern_territory">Northern Territory</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Post Code</label>
+                <input name="postalCode" ng-model="booking.delivery.postCode" ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Delivery Date</label>
+                <md-datepicker ng-model="booking.delivery.date" md-placeholder="Enter date" required></md-datepicker>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Delivery Time</label>
+                <input type="time" name="booking.delivery.time" placeholder="00:00 AM/PM" required>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Fragile</label>
+                <md-select name="type" ng-model="booking.fragile" required>
+                    <md-option value="no">No</md-option>
+                    <md-option value="yes">Yes</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Payment Type</label>
+                <md-select name="type" ng-model="booking.paymentType" required>
+                    <md-option value="account">Account</md-option>
+                    <md-option value="credit">Credit Card</md-option>
+                    <md-option value="cash">Cash</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Customer Comments</label>
+                <textarea ng-model="booking.customerComments" md-maxlength="300" rows="5" md-select-on-focus></textarea>
+            </md-input-container>
+        </div>
+
+		<h3>Packages:</h3>
+		<table name="packages" ng-model="booking.packages">
+			<tr>
+				<th>Weight</th>
+				<th>Length</th>
+				<th>Width</th>
+				<th>Height</th>
+			</tr>
+			<tr ng-repeat="package in booking.packages">
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.weight" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.length" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.width" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.height" required>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-button class="md-raised" ng-click="removePackage($index)"><md-icon>clear</md-icon></md-button>
+                </td>
+			</tr>
+		</table>
+        <div>
+            <md-button class="md-raised" ng-click="addPackage()"><md-icon>add</md-icon></md-button>
+        </div>
+        <br><br><br>
+        <div>
+            <md-button class="md-raised" type="submit">Request a Quote</md-button>
+        </div>
+	</form>
+</md-content>

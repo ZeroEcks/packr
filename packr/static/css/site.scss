@@ -3,10 +3,6 @@
     min-width: 250px;
 }
 
-.sidenav-left-toolbar {
-    /*border-bottom: 1px solid #e0e0e0;*/
-}
-
 @media (min-width: 1280px) {
     sidenav {
         /* This is what sidebars are expected to have */
@@ -57,26 +53,9 @@ html, body, .md-sidenav-left {
 	background-size: cover;
 	background: url(../img/banner.jpg) no-repeat fixed top center;
 }
-#services-body {
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-size: cover;
-	background: url(../img/banner.jpg) no-repeat fixed top center;
-}
 #about p {
 	padding: 5px;
 }
-
-#services h3{
-	padding-top: 5px;
-}
-#services h2{
-	font-size: 200%;
-}
-#services p {
-	padding-bottom: 5px;
-}
-
 
 /* make these into classes */
 #about-text {
@@ -85,11 +64,6 @@ html, body, .md-sidenav-left {
 }
 
 #about {
-	text-align: center;
-	margin-left: 200px;
-	margin-right: 200px;
-}
-#services {
 	text-align: center;
 	margin-left: 200px;
 	margin-right: 200px;

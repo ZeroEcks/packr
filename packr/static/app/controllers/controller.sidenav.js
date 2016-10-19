@@ -16,20 +16,24 @@
             $location.path('/services');
         };
 
+        self.goWhyUs = function () {
+            $location.path('/why-us');
+        };
+
         self.goContact = function () {
             $location.path('/contact');
         };
 
         self.goQuote = function () {
-
+            $location.path('/quote');
         };
 
         self.goTrack = function () {
-
+            $location.path('/track');
         };
 
         self.goBook = function () {
-
+            $location.path('/book');
         };
 
         self.goHome = function () {
