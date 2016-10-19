@@ -28,6 +28,9 @@
             .when('/', {
                 templateUrl: 'static/views/home.html'
             })
+            .when('/contact', {
+                template: '<contact></contact>'
+            })
             .when('/register', {
                 template: '<register></register>',
                 resolve: {

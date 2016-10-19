@@ -12,7 +12,7 @@ from flask_script.commands import Clean, ShowUrls
 
 from packr.app import create_app
 from packr.extensions import db
-from packr.settings import DevConfig, ProdConfig
+from packr.settings import DevConfig, ProdConfig, TestConfig
 
 CONFIG = ProdConfig if os.environ.get('PACKR_ENV') == 'prod' else DevConfig
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -48,6 +48,7 @@ def _make_context():
 def test():
     """Run the tests."""
     import pytest
+    CONFIG = TestConfig  # noqa
     exit_code = pytest.main([TEST_PATH, '--verbose'])
     return exit_code
 
