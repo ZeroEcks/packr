@@ -27,7 +27,7 @@
         </div>
 
         <div layout-gt-sm="row">
-            <md-input-container flex="50">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>Service Type</label>
                 <md-select name="type" ng-model="quote.type" required>
                     <md-option value="standard">Standard</md-option>
@@ -36,7 +36,7 @@
                     <md-option value="dangerous">Dangerous Goods</md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex="50" ng-if="quote.type === 'dangerous'">
+            <md-input-container class="md-block" flex-gt-sm ng-if="quote.type === 'dangerous'">
                 <label>Dangerous Goods Type</label>
                 <md-select name="type" ng-model="quote.dangerous" required>
                     <md-option value="none">No Dangerous Goods</md-option>
@@ -52,17 +52,17 @@
         </div>
 
         <div layout-gt-sm="row">
-            <md-input-container flex="50">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>Street Name and Number</label>
                 <input name="text" ng-model="quote.street" required>
             </md-input-container>
-            <md-input-container flex="50">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>Suburb</label>
                 <input name="text" ng-model="quote.suburb" required>
             </md-input-container>
         </div>
         <div layout-gt-sm="row">
-            <md-input-container flex="50">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>State</label>
                 <md-select name="type" ng-model="quote.state" required>
                     <md-option value="act">ACT</md-option>
@@ -75,7 +75,7 @@
                     <md-option value="northern_territory">Northern Territory</md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container flex="50">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>Post Code</label>
                 <input name="postalCode" ng-model="quote.postCode" required ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
             </md-input-container>

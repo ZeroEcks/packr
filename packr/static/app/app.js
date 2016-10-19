@@ -50,7 +50,7 @@
                 templateUrl: 'static/views/about.html'
             })
             .when('/book', {
-                templateUrl: 'static/views/booking.html',
+                template: '<booking></booking>',
                 resolve: {
                     'requiresLogin': requiresLogin
                 }

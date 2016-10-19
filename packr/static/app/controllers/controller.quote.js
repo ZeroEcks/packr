@@ -10,7 +10,7 @@
             phone: "",
             email: "",
             type: "",
-            dangerous: "",
+            dangerous: "none",
             street: "",
             suburb: "",
             state: "",
