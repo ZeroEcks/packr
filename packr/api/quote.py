@@ -72,7 +72,6 @@ class QuoteItem(Resource):
 
         args = req_parse.parse_args()
 
-        businessName = args.get('businessName')
         contactName = args.get('contactName')
         phone = args.get('phone')
         email = args.get('email')
