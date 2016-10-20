@@ -3,7 +3,7 @@
     <div layout="row" layout-align="center">
 	    <h2>Request a Quote</h2>
     </div>
-	<form flex ng-submit="submit()">
+	<form flex name="$ctrl.quoteForm" ng-submit="submit()">
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Business Name</label>
@@ -84,10 +84,10 @@
 		<h3>Packages:</h3>
 		<table name="packages" ng-model="quote.packages">
 			<tr>
-				<th>Weight</th>
-				<th>Length</th>
-				<th>Width</th>
-				<th>Height</th>
+				<th>Weight (kg)</th>
+				<th>Length (cm)</th>
+				<th>Width (cm)</th>
+				<th>Height (cm)</th>
 			</tr>
 			<tr ng-repeat="package in quote.packages">
 				<td>
@@ -119,8 +119,14 @@
             <md-button class="md-raised" ng-click="addPackage()"><md-icon>add</md-icon></md-button>
         </div>
         <br><br><br>
-        <div>
+        <div layout="row" layout-align="center">
             <md-button class="md-raised" type="submit">Request a Quote</md-button>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Resultant Quote (AUD)</label>
+                <input name="number" ng-model="quote.result" disabled>
+            </md-input-container>
         </div>
 	</form>
 </md-content>
