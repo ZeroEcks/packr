@@ -113,8 +113,6 @@ class QuoteItem(Resource):
         if not packages:
             return {'message': {'email': 'No packages provided'}}, 400
 
-        print(packages)
-
         # Calculate the monies
         quote_amount = 0
         for package in packages:

@@ -22,8 +22,6 @@
         };
 
         $scope.submit = function () {
-            console.log($scope.quote);
-
             var modified_quote = angular.copy($scope.quote);
 
             modified_quote.packages = JSON.stringify(modified_quote.packages);

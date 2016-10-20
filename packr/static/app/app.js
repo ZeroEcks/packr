@@ -65,7 +65,7 @@
                 template: '<quote></quote>'
             })
             .when('/track', {
-                templateUrl: 'static/views/track.html'
+                template: '<track></track>'
             })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
