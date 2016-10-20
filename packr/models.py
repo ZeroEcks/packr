@@ -112,6 +112,25 @@ class Driver(SurrogatePK, Model):
             full_name='{0} {1}'.format(self.firstname, self.lastname))
 
 
+class Address(SurrogatePK, Model):
+    """An address"""
+
+    __tablename__ = 'addresses'
+    street = Column(db.String(80), nullable=False)
+    suburb = Column(db.String(30), nullable=False)
+    state = Column(db.String(15), nullable=False)
+    post_code = Column(db.Integer, nullable=False)
+    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+
+    def __init__(self, name, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, name=name, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Address({street})>'.format(street=self.street)
+
+
 class Order(SurrogatePK, Model):
     """An order."""
 
@@ -124,6 +143,7 @@ class Order(SurrogatePK, Model):
     notes = Column(db.Text, nullable=True)
     driver_notes = Column(db.Text, nullable=True)
     cost = Column(db.Float, nullable=False)
+    eta = Column(db.Date, nullable=True)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
     driver_id = Column(db.Integer, db.ForeignKey('drivers.id'))
 
@@ -133,6 +153,8 @@ class Order(SurrogatePK, Model):
     status = relationship("OrderStatus", backref='order')
     delivery = relationship("Delivery", backref='order')
     issue = relationship("Issue", backref='order')
+    delivery_address = relationship('Address')
+    pickup_address = relationship('Address')
 
     def __init__(self, name, **kwargs):
         """Create instance."""
@@ -148,7 +170,8 @@ class OrderStatus(SurrogatePK, Model):
 
     __tablename__ = 'order_statuses'
     status = Column(db.String(80), nullable=False)
-    time = Column(db.Time(), nullable=False)
+    time = Column(db.DateTime, nullable=False)
+    address = Column(db.String(80), nullable=False)
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
 
     def __init__(self, name, **kwargs):
