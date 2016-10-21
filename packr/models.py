@@ -27,17 +27,20 @@ class User(SurrogatePK, Model):
     __tablename__ = 'users'
     email = Column(db.String(80), unique=True, nullable=False)
     password = Column(db.String(128), nullable=True)
+    firstname = Column(db.String(30), nullable=True)
+    lastname = Column(db.String(30), nullable=True)
     created_at = Column(db.DateTime,
                         nullable=False,
                         default=dt.datetime.utcnow)
-    firstname = Column(db.String(30), nullable=True)
-    lastname = Column(db.String(30), nullable=True)
     active = Column(db.Boolean(), default=True)
     business_account = db.Column(db.Boolean, nullable=True, default=False)
     role_id = Column(db.Integer(), db.ForeignKey('roles.id'))
-    role = relationship('Role', lazy='joined')
+    contact_id = Column(db.Integer(), db.ForeignKey('contacts.id'))
 
-    orders = db.relationship('Order', backref='user')
+    role = relationship('Role', lazy='joined')
+    contact = relationship('Contact', uselist=False)
+    orders = db.relationship('Order', foreign_keys="Order.user_id")
+    deliveries = db.relationship('Order', foreign_keys="Order.driver_id")
     conversations = relationship('Conversation', backref='user', lazy='joined')
 
     def __init__(self, email, password=None, **kwargs):
@@ -65,51 +68,37 @@ class User(SurrogatePK, Model):
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<User({username!r})>'.format(username=self.username)
+        return '<User({id})>'.format(id=self.id)
 
 
-# Due to a limitation in SQLAlchemy, we can't use a User for this.
-class Driver(SurrogatePK, Model):
-    """A driver for the company."""
+class ServiceType(SurrogatePK, Model):
+    """A service type"""
 
-    __tablename__ = 'drivers'
-    email = Column(db.String(80), unique=True, nullable=False)
-    password = Column(db.String(128), nullable=True)
-    created_at = Column(db.DateTime,
-                        nullable=False,
-                        default=dt.datetime.utcnow)
-    firstname = Column(db.String(30), nullable=True)
-    lastname = Column(db.String(30), nullable=True)
+    __tablename__ = 'service_types'
+    name = Column(db.String(30), nullable=False)
 
-    orders = db.relationship('Order', backref='driver')
-
-    def __init__(self, email, password=None, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self,
-                          email=email,
-                          **kwargs)
-        if password:
-            self.set_password(password)
-        else:
-            self.password = None
-
-    def set_password(self, password):
-        """Set password."""
-        self.password = bcrypt.generate_password_hash(password)
-
-    def verify_password(self, value):
-        """Check password."""
-        return bcrypt.check_password_hash(self.password, value)
-
-    @property
-    def full_name(self):
-        """Full user name."""
-        return '{0} {1}'.format(self.firstname, self.lastname)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
-        return '<Driver({full_name})>'.format(
-            full_name='{0} {1}'.format(self.firstname, self.lastname))
+        return '<ServiceType({name})>'.format(name=self.name)
+
+
+class DangerClass(SurrogatePK, Model):
+    """A danger class"""
+
+    __tablename__ = 'danger_classes'
+    name = Column(db.String(30), nullable=False)
+
+    def __init__(self, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<DangerClass({name})>'.format(name=self.name)
 
 
 class Address(SurrogatePK, Model):
@@ -121,13 +110,31 @@ class Address(SurrogatePK, Model):
     state = Column(db.String(15), nullable=False)
     post_code = Column(db.Integer, nullable=False)
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<Address({street})>'.format(street=self.street)
+
+
+class Contact(SurrogatePK, Model):
+    """A contact"""
+
+    __tablename__ = 'contacts'
+    business_name = Column(db.String(80), nullable=False)
+    contact_name = Column(db.String(40), nullable=False)
+    phone = Column(db.String(20), nullable=False)
+    email = Column(db.String(80), nullable=False)
+
+    def __init__(self, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<Contact({id})>'.format(id=self.id)
 
 
 class Order(SurrogatePK, Model):
@@ -144,26 +151,47 @@ class Order(SurrogatePK, Model):
     cost = Column(db.Float, nullable=False)
     eta = Column(db.Date, nullable=True)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
-    driver_id = Column(db.Integer, db.ForeignKey('drivers.id'))
+    driver_id = Column(db.Integer, db.ForeignKey('users.id'))
     delivery_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
+    delivery_contact_id = Column(db.Integer, db.ForeignKey('contacts.id'))
     pickup_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
+    pickup_contact_id = Column(db.Integer, db.ForeignKey('contacts.id'))
+    danger_id = Column(db.Integer(), db.ForeignKey('danger_classes.id'))
+    service_type_id = Column(db.Integer(), db.ForeignKey('service_types.id'))
+    fragile = Column(db.Boolean(), nullable=False)
 
+    danger = relationship('DangerClass', uselist=False)
     payment = relationship("Payment",
                            backref=db.backref("order", uselist=False))
     package = relationship("Package", backref="order")
     status = relationship("OrderStatus", backref='order')
     delivery = relationship("Delivery", backref='order')
     issue = relationship("Issue", backref='order')
+    driver = relationship("User",
+                          uselist=False,
+                          foreign_keys="Order.driver_id")
+    user = relationship("User",
+                        uselist=False,
+                        foreign_keys="Order.user_id")
     delivery_address = relationship('Address',
                                     uselist=False,
                                     foreign_keys="Order.delivery_address_id")
     pickup_address = relationship('Address',
                                   uselist=False,
                                   foreign_keys="Order.pickup_address_id")
+    delivery_contact = relationship('Contact',
+                                    uselist=False,
+                                    foreign_keys="Order.delivery_contact_id")
+    pickup_contact = relationship('Contact',
+                                  uselist=False,
+                                  foreign_keys="Order.pickup_contact_id")
+    service_type = relationship('ServiceType',
+                                uselist=False,
+                                foreign_keys="Order.service_type_id")
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
@@ -265,15 +293,15 @@ class Package(SurrogatePK, Model):
 
     __tablename__ = "packages"
     weight = Column(db.Float(), nullable=False)
-    dimensions = Column(db.String(32), nullable=False)
-    danger_class = Column(db.Integer(), nullable=False, default=0)
-    fragile = Column(db.Boolean(), nullable=False)
+    width = Column(db.Float(), nullable=False)
+    height = Column(db.Float(), nullable=False)
+    length = Column(db.Float(), nullable=False)
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
     delivery_id = Column(db.Integer, db.ForeignKey('deliveries.id'))
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""
