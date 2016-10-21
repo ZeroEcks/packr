@@ -6,6 +6,7 @@ from glob import glob
 from subprocess import call
 
 from flask import url_for
+from flask.ext.sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Command, Manager, Option, Server, Shell
 from flask_script.commands import Clean, ShowUrls
@@ -68,6 +69,15 @@ def reset():
         print(e.with_traceback())
         return 1
     return 0
+
+
+@manager.command
+def setup_db():
+    """Setup the database with initial values"""
+
+    for line in open('setup.sql'):
+        db.session.execute(line)
+        db.session.commit()
 
 
 class Lint(Command):
