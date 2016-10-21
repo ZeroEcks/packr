@@ -37,7 +37,7 @@ class TrackItem(Resource):
 
         for status in order.status:
             statuses.append({'status': status.status,
-                             'date': status.time,
+                             'date': status.time.strftime('%Y-%m-%dT%H:%M:%S'),
                              'address': status.address})
 
         delivery_address = "{0} {1} {2} {3}".format(
@@ -52,5 +52,7 @@ class TrackItem(Resource):
             order.pickup_address.state,
             order.pickup_address.post_code)
 
-        return {'eta': order.eta, 'delivery_address': delivery_address,
-                'pickup_address': pickup_address, 'statuses': statuses}, 201
+        return {'eta': order.eta.strftime('%Y-%m-%dT%H:%M:%S'),
+                'delivery_address': delivery_address,
+                'pickup_address': pickup_address,
+                'statuses': statuses}, 201

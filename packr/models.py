@@ -146,6 +146,8 @@ class Order(SurrogatePK, Model):
     eta = Column(db.Date, nullable=True)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
     driver_id = Column(db.Integer, db.ForeignKey('drivers.id'))
+    delivery_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
+    pickup_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
 
     payment = relationship("Payment",
                            backref=db.backref("order", uselist=False))
@@ -153,8 +155,12 @@ class Order(SurrogatePK, Model):
     status = relationship("OrderStatus", backref='order')
     delivery = relationship("Delivery", backref='order')
     issue = relationship("Issue", backref='order')
-    delivery_address = relationship('Address')
-    pickup_address = relationship('Address')
+    delivery_address = relationship('Address',
+                                    uselist=False,
+                                    foreign_keys="Order.delivery_address_id")
+    pickup_address = relationship('Address',
+                                  uselist=False,
+                                  foreign_keys="Order.pickup_address_id")
 
     def __init__(self, name, **kwargs):
         """Create instance."""
