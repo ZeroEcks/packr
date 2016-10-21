@@ -120,7 +120,6 @@ class Address(SurrogatePK, Model):
     suburb = Column(db.String(30), nullable=False)
     state = Column(db.String(15), nullable=False)
     post_code = Column(db.Integer, nullable=False)
-    order_id = Column(db.Integer, db.ForeignKey('orders.id'))
 
     def __init__(self, name, **kwargs):
         """Create instance."""
