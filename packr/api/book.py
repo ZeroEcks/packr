@@ -11,7 +11,7 @@ from packr.models import Contact, Address, Order, Package, DangerClass
 api = Namespace('book',
                 description='Operations related to creating a booking')
 
-booking = api.model('Booking', {
+booking = api.model('Book', {
     'type': fields.String(readOnly=True,
                           descriptuon='The service type'),
     'dangerous': fields.String(readOnly=True,
@@ -32,7 +32,7 @@ booking = api.model('Booking', {
 
 
 @api.route('/')
-class QuoteItem(Resource):
+class BookItem(Resource):
     @api.expect(booking)
     @api.response(204, 'Created booking.')
     def post(self):
