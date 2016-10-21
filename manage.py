@@ -70,6 +70,15 @@ def reset():
     return 0
 
 
+@manager.command
+def setup_db():
+    """Setup the database with initial values"""
+
+    for line in open('setup.sql'):
+        db.session.execute(line)
+        db.session.commit()
+
+
 class Lint(Command):
     """Lint and check code style with flake8 and isort."""
 
