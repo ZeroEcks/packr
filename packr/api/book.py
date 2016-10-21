@@ -6,7 +6,8 @@ import datetime
 from flask_restplus import Namespace, Resource, fields, reqparse
 from flask_jwt import current_identity
 
-from packr.models import Contact, Address, Order, Package, DangerClass
+from packr.models import Contact, Address, Order, Package, DangerClass, \
+    ServiceType
 
 api = Namespace('book',
                 description='Operations related to creating a booking')
@@ -64,7 +65,7 @@ class BookItem(Resource):
 
         args = req_parse.parse_args()
 
-        # serviceType = args.get('type')
+        serviceType = args.get('type')
         dangerous = args.get('dangerous')
 
         pickup = json.loads(args.get('pickup'))
@@ -203,6 +204,7 @@ class BookItem(Resource):
             weight += float(package['weight'])
 
         danger_class = DangerClass.query.filter_by(name=dangerous).first()
+        service_type = ServiceType.query.filter_by(name=serviceType).first()
 
         new_order = Order(created_at=datetime.datetime.utcnow(),
                           cost=0,
@@ -215,7 +217,8 @@ class BookItem(Resource):
                           fragile=(fragile == 'yes'),
                           danger=danger_class,
                           user_id=current_identity.id,
-                          details=comments)
+                          details=comments,
+                          service_type=service_type)
 
         new_order.save()
 

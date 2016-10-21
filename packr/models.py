@@ -71,6 +71,21 @@ class User(SurrogatePK, Model):
         return '<User({id})>'.format(id=self.id)
 
 
+class ServiceType(SurrogatePK, Model):
+    """A service type"""
+
+    __tablename__ = 'service_types'
+    name = Column(db.String(30), nullable=False)
+
+    def __init__(self, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<ServiceType({name})>'.format(name=self.name)
+
+
 class DangerClass(SurrogatePK, Model):
     """A danger class"""
 
@@ -142,6 +157,7 @@ class Order(SurrogatePK, Model):
     pickup_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
     pickup_contact_id = Column(db.Integer, db.ForeignKey('contacts.id'))
     danger_id = Column(db.Integer(), db.ForeignKey('danger_classes.id'))
+    service_type_id = Column(db.Integer(), db.ForeignKey('service_types.id'))
     fragile = Column(db.Boolean(), nullable=False)
 
     danger = relationship('DangerClass', uselist=False)
@@ -169,6 +185,9 @@ class Order(SurrogatePK, Model):
     pickup_contact = relationship('Contact',
                                   uselist=False,
                                   foreign_keys="Order.pickup_contact_id")
+    service_type = relationship('ServiceType',
+                                uselist=False,
+                                foreign_keys="Order.service_type_id")
 
     def __init__(self, **kwargs):
         """Create instance."""
