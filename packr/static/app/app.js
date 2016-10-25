@@ -55,8 +55,8 @@
                     'requiresLogin': requiresLogin
                 }
             })
-            .when('/book-amend', {
-                templateUrl: 'static/views/booking-amend.html',
+            .when('/driver', {
+                template: '<driver></driver>',
                 resolve: {
                     'requiresLogin': requiresLogin
                 }

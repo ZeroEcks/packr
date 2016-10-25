@@ -198,14 +198,32 @@ class Order(SurrogatePK, Model):
         return '<Order({id})>'.format(id=self.id)
 
 
+class StatusType(SurrogatePK, Model):
+    """A type of status."""
+
+    __tablename__ = 'status_types'
+    name = Column(db.String(10), nullable=False)
+    status = Column(db.String(80), nullable=False)
+
+    def __init__(self, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<StatusType({name})>'.format(name=self.name)
+
+
 class OrderStatus(SurrogatePK, Model):
     """A status for an order."""
 
     __tablename__ = 'order_statuses'
-    status = Column(db.String(80), nullable=False)
     time = Column(db.DateTime, nullable=False)
     address = Column(db.String(80), nullable=False)
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+    status_id = Column(db.Integer, db.ForeignKey('status_types.id'))
+
+    status = relationship('StatusType', uselist=False)
 
     def __init__(self, name, **kwargs):
         """Create instance."""
