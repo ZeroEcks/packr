@@ -90,8 +90,9 @@ def setup_db():
     """Setup the database with initial values"""
 
     for line in open('setup.sql'):
-        db.session.execute(line)
-        db.session.commit()
+        if line:
+            db.session.execute(line)
+            db.session.commit()
 
 
 @manager.command
