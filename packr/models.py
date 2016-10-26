@@ -58,7 +58,7 @@ class User(SurrogatePK, Model):
 
     def set_password(self, password):
         """Set password."""
-        self.password = bcrypt.generate_password_hash(password)
+        self.password = bcrypt.generate_password_hash(password).decode('utf8')
 
     def verify_password(self, value):
         """Check password."""
