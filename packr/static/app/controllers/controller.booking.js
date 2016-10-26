@@ -7,7 +7,6 @@
         $scope.booking = {
             type: "",
             dangerous: "none",
-            requirePickup: "no",
             pickup: {
                 businessName: "",
                 contactName: "",

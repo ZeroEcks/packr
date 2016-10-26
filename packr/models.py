@@ -145,11 +145,15 @@ class Order(SurrogatePK, Model):
                         nullable=False,
                         default=dt.datetime.utcnow)
     weight = Column(db.Float(), nullable=False)
-    details = Column(db.Text, nullable=True)
     notes = Column(db.Text, nullable=True)
     driver_notes = Column(db.Text, nullable=True)
     cost = Column(db.Float, nullable=False)
     eta = Column(db.Date, nullable=True)
+    pickup_time = Column(db.DateTime,
+                         nullable=False,
+                         default=dt.datetime.utcnow)
+    fragile = Column(db.Boolean(), nullable=False)
+    payment_type = Column(db.String(20), nullable=False)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
     driver_id = Column(db.Integer, db.ForeignKey('users.id'))
     delivery_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
@@ -158,7 +162,6 @@ class Order(SurrogatePK, Model):
     pickup_contact_id = Column(db.Integer, db.ForeignKey('contacts.id'))
     danger_id = Column(db.Integer(), db.ForeignKey('danger_classes.id'))
     service_type_id = Column(db.Integer(), db.ForeignKey('service_types.id'))
-    fragile = Column(db.Boolean(), nullable=False)
 
     danger = relationship('DangerClass', uselist=False)
     payment = relationship("Payment",
@@ -198,18 +201,36 @@ class Order(SurrogatePK, Model):
         return '<Order({id})>'.format(id=self.id)
 
 
+class StatusType(SurrogatePK, Model):
+    """A type of status."""
+
+    __tablename__ = 'status_types'
+    name = Column(db.String(10), nullable=False)
+    status = Column(db.String(80), nullable=False)
+
+    def __init__(self, **kwargs):
+        """Create instance."""
+        db.Model.__init__(self, **kwargs)
+
+    def __repr__(self):
+        """Represent instance as a unique string."""
+        return '<StatusType({name})>'.format(name=self.name)
+
+
 class OrderStatus(SurrogatePK, Model):
     """A status for an order."""
 
     __tablename__ = 'order_statuses'
-    status = Column(db.String(80), nullable=False)
     time = Column(db.DateTime, nullable=False)
     address = Column(db.String(80), nullable=False)
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
+    status_id = Column(db.Integer, db.ForeignKey('status_types.id'))
 
-    def __init__(self, name, **kwargs):
+    status = relationship('StatusType', uselist=False)
+
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""

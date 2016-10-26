@@ -4,6 +4,8 @@ from .user import api as user_api
 from .quote import api as quote_api
 from .track import api as track_api
 from .book import api as book_api
+from .lookup import api as lookup_api
+from .update import api as update_api
 
 blueprint = Blueprint('api', __name__)
 api = Api(blueprint,
@@ -14,3 +16,5 @@ api.add_namespace(user_api)
 api.add_namespace(quote_api)
 api.add_namespace(track_api)
 api.add_namespace(book_api)
+api.add_namespace(lookup_api)
+api.add_namespace(update_api)
