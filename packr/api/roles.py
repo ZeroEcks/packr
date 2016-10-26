@@ -28,6 +28,9 @@ class RolesGetItem(Resource):
         users_list = list()
         roles_list = list()
 
+        if current_identity.role.role_name != 'admin':
+            return {'description': 'Access denied.'}, 401
+
         for user in User.query:
             users_list.append({
                 'id': user.id,
@@ -60,6 +63,9 @@ class RolesUpdateItem(Resource):
 
         user_id = args.get('id', -1)
         role = args.get('role')
+
+        if current_identity.role.role_name != 'admin':
+            return {'description': 'Access denied.'}, 401
 
         user = User.query.filter_by(id=user_id).first()
         if not user:
