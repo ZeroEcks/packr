@@ -9,6 +9,7 @@
             <tr>
                 <th>Date Created</th>
                 <th>Cost</th>
+                <th>Last Status</th>
                 <th>Last Updated</th>
                 <th>Actions</th>
             </tr>
@@ -25,6 +26,11 @@
                 </td>
                 <td>
                     <md-input-container class="md-block" flex-gt-sm>
+                        <input name="text" ng-model="order.lastStatus" disabled>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="md-block" flex-gt-sm>
                         <input name="text" ng-model="order.lastUpdate" disabled>
                     </md-input-container>
                 </td>
@@ -32,7 +38,7 @@
                     <md-input-container class="md-block" flex-gt-sm>
                         <md-button class="md-raised" ng-click="trackOrder(order.id)">Track</md-button>
                         <md-button class="md-raised" ng-click="conNote(order.id)">View Con Note</md-button>
-                        <md-button class="md-raised" ng-click="process(order.id)" ng-if="admin">Process Order</md-button>
+                        <md-button class="md-raised" ng-click="process(order.id)" ng-if="admin && order.lastStatus === 'Booked'">Process Order</md-button>
                         <md-button class="md-raised" ng-click="driverNotes(order.id)" ng-if="driver">Update Notes</md-button>
                         <md-button class="md-raised" ng-click="statusUpdate(order.id)" ng-if="driver || admin">Update Status</md-button>
                     </md-input-container>

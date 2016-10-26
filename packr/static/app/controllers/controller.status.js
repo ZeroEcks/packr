@@ -22,6 +22,10 @@
                     ErrorHelperService.displayInputControlError(error.message, self.statusForm);
                 });
         };
+
+        if ($routeParams.id !== undefined) {
+            $scope.con_number = $routeParams.id;
+        }
     }
 
     statusController.$inject = deps;
