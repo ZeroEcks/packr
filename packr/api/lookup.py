@@ -39,7 +39,7 @@ class LookupItem(Resource):
 
         for status in order.status:
             statuses.append({
-                'status': status.status,
+                'status': status.status.status,
                 'date': status.time.strftime('%Y-%m-%dT%H:%M:%S'),
                 'address': status.address
             })

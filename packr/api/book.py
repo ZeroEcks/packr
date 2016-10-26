@@ -8,7 +8,7 @@ from flask_restplus import Namespace, Resource, fields, reqparse
 from flask_jwt import current_identity, jwt_required
 
 from packr.models import Contact, Address, Order, Package, DangerClass, \
-    ServiceType
+    ServiceType, OrderStatus, StatusType
 
 api = Namespace('book',
                 description='Operations related to creating a booking')
@@ -235,6 +235,17 @@ class BookItem(Resource):
                           pickup_time=datetime.datetime.strptime(
                               pickup['dateTime'],
                               date_format))
+
+        status_type = StatusType.query.filter_by(name='booked').first()
+
+        order_status = OrderStatus(status=status_type,
+                                   address='On The Spot Depot',
+                                   time=datetime.datetime.utcnow(),
+                                   order_id=new_order.id)
+
+        order_status.save()
+
+        new_order.status.append(order_status)
 
         new_order.save()
 

@@ -228,9 +228,9 @@ class OrderStatus(SurrogatePK, Model):
 
     status = relationship('StatusType', uselist=False)
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
-        db.Model.__init__(self, name=name, **kwargs)
+        db.Model.__init__(self, **kwargs)
 
     def __repr__(self):
         """Represent instance as a unique string."""

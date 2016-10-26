@@ -39,8 +39,9 @@
             customerComments: "",
             cost: 0,
             eta: "",
+            statuses: [
+            ],
             packages: [
-                {'weight': 0, 'length': 0, 'width': 0, 'height': 0}
             ]
         };
 
@@ -50,7 +51,9 @@
         };
 
         $scope.submitStatus = function () {
-            var send_data = {con_number: $scope.track.con_number, status: $scope.status};
+            var send_data = {con_number: $scope.con_number, status: $scope.status};
+
+            send_data.status = JSON.stringify(send_data.status);
 
             DataService.post('/api/update/status', send_data)
                 .then(function (data) {
@@ -79,7 +82,7 @@
         };
 
         $scope.submit = function () {
-            var send_data = {con_number: $scope.track.con_number};
+            var send_data = {con_number: $scope.con_number};
 
             DataService.post('/api/update/driver', send_data)
                 .then(function (data) {
