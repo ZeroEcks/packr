@@ -13,6 +13,8 @@
             <md-button class="md-raised" type="submit">Search</md-button>
         </div>
 
+        <br><br><br>
+
         <!-- display consignment details -->
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
@@ -20,32 +22,6 @@
                 <input name="text" ng-model="track.eta" disabled>
             </md-input-container>
         </div>
-
-        <!-- Picked up, Warehouse, Delivered -->
-        <table name="statuses" ng-model="track.statuses">
-            <tr>
-                <th>Date</th>
-                <th>Location</th>
-                <th>Status</th>
-            </tr>
-            <tr ng-repeat="status in track.statuses">
-                <td>
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <input name="text" ng-model="status.date" disabled>
-                    </md-input-container>
-                </td>
-                <td>
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <input name="text" ng-model="status.address" disabled>
-                    </md-input-container>
-                </td>
-                <td>
-                    <md-input-container class="md-block" flex-gt-sm>
-                        <input name="text" ng-model="status.status" disabled>
-                    </md-input-container>
-                </td>
-            </tr>
-        </table>
 
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
@@ -56,6 +32,34 @@
                 <label>Delivery Address</label>
                 <input name="text" ng-model="track.delivery_address" disabled>
             </md-input-container>
+        </div>
+
+        <!-- Picked up, Warehouse, Delivered -->
+        <div layout="row" layout-align="center">
+            <table name="statuses" ng-model="track.statuses">
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                </tr>
+                <tr ng-repeat="status in track.statuses">
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="text" ng-model="status.date" disabled>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="text" ng-model="status.address" disabled>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="text" ng-model="status.status" disabled>
+                        </md-input-container>
+                    </td>
+                </tr>
+            </table>
         </div>
     </form>
 </md-content>

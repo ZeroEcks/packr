@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ErrorHelperService', '$scope'];
-    function trackController(DataService, ErrorHelperService, $scope) {
+    var deps = ['DataService', 'ErrorHelperService', '$scope', '$routeParams'];
+    function trackController(DataService, ErrorHelperService, $scope, $routeParams) {
         var self = this; // jshint ignore:line
         $scope.track = {
             con_number: "",
@@ -29,6 +29,10 @@
                 });
         };
 
+        if ($routeParams.id !== undefined) {
+            $scope.track.con_number = $routeParams.id;
+            $scope.submit();
+        }
     }
 
     trackController.$inject = deps;

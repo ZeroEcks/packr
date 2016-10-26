@@ -57,7 +57,7 @@
 
             DataService.post('/api/book/', modified_booking)
                 .then(function (data) {
-                    $location = '/';
+                    $location.path('/');
                 })
                 .catch(function (error) {
                     ErrorHelperService.displayInputControlError(error.message, self.quoteForm);

@@ -67,6 +67,12 @@
             .when('/track', {
                 template: '<track></track>'
             })
+            .when('/orders', {
+                template: '<orders></orders>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })
