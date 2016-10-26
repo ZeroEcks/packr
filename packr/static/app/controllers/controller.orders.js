@@ -10,8 +10,10 @@
             ]
         };
 
-        $scope.driver = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 2;
-        $scope.admin = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 3;
+        if ($window.localStorage.getItem('detailedUser') !== null) {
+            $scope.driver = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 2;
+            $scope.admin = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 3;
+        }
 
         DataService.post('/api/orders/', {})
             .then(function (data) {

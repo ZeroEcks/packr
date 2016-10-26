@@ -5,7 +5,9 @@
     function sidenavController($scope, $location, $mdSidenav, $window) {
         var self = this; // jshint ignore:line
 
-        $scope.admin = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 3;
+        if ($window.localStorage.getItem('detailedUser') !== null) {
+            $scope.admin = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 3;
+        }
 
         $scope.$on('toggleLeft', function(event, mass) { buildToggler('left')();});
         function buildToggler(componentId) {
