@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Management script."""
+import datetime
 import os
 from glob import glob
 from subprocess import call
@@ -12,6 +13,8 @@ from flask_script.commands import Clean, ShowUrls
 
 from packr.app import create_app
 from packr.extensions import db
+from packr.models import Role
+from packr.models import User
 from packr.settings import DevConfig, ProdConfig, TestConfig
 
 CONFIG = ProdConfig if os.environ.get('PACKR_ENV') == 'prod' else DevConfig
@@ -78,6 +81,22 @@ def setup_db():
     for line in open('setup.sql'):
         db.session.execute(line)
         db.session.commit()
+
+
+@manager.command
+def make_admin_account(email, password, firstname, lastname):
+    """Created an admin account"""
+
+    admin_role = Role.query.filter_by(role_name='admin').first()
+
+    user = User(email=email,
+                password=password,
+                firstname=firstname,
+                lastname=lastname,
+                role=admin_role,
+                created_at=datetime.datetime.utcnow())
+
+    user.save()
 
 
 class Lint(Command):

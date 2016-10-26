@@ -45,7 +45,6 @@ class User(SurrogatePK, Model):
     contact = relationship('Contact', uselist=False)
     orders = db.relationship('Order', foreign_keys="Order.user_id")
     deliveries = db.relationship('Order', foreign_keys="Order.driver_id")
-    conversations = relationship('Conversation', backref='user', lazy='joined')
 
     def __init__(self, email, password=None, **kwargs):
         """Create instance."""
@@ -287,7 +286,7 @@ class Issue(SurrogatePK, Model):
     issue = Column(db.Text, nullable=False)
     order_id = Column(db.Integer, db.ForeignKey('orders.id'))
 
-    def __init__(self, name, **kwargs):
+    def __init__(self, **kwargs):
         """Create instance."""
         db.Model.__init__(self, **kwargs)
 

@@ -1,5 +1,6 @@
 import datetime
 
+from flask.ext.jwt import jwt_required, current_identity
 from flask_restplus import Namespace, Resource, fields, reqparse
 
 from packr.models import Order, Role, User
@@ -17,6 +18,7 @@ lookup = api.model('Lookup', {
 class LookupItem(Resource):
     @api.expect(lookup)
     @api.response(204, 'Successfully looked up order.')
+    @jwt_required()
     def post(self):
         req_parse = reqparse.RequestParser(bundle_errors=True)
         req_parse.add_argument('con_number', type=int, required=True,
@@ -34,6 +36,14 @@ class LookupItem(Resource):
         order = Order.query.filter_by(id=con_number).first()
         if not order:
             return {'description': 'Unknown consignment number.'}, 404
+
+        if current_identity.role.role_name != 'admin':
+            if order.user_id != current_identity.id:
+                if current_identity.role.role_name == 'driver':
+                    if order.driver_id != current_identity.id:
+                        return {'description': 'Access denied.'}, 401
+                else:
+                    return {'description': 'Access denied.'}, 401
 
         statuses = list()
 

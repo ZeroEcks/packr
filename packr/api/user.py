@@ -4,7 +4,8 @@ import jsonpickle
 from flask_restplus import Namespace, Resource, fields, reqparse
 from sqlalchemy.exc import IntegrityError
 from flask_jwt import current_identity, jwt_required
-from packr.models import User
+
+from packr.models import User, Role
 
 api = Namespace('user',
                 description='Operations related to the current user')
@@ -97,10 +98,13 @@ class UserItem(Resource):
         if lastname == '':
             return {'message': {'lastname': 'No last name provided'}}, 400
 
+        user_role = Role.query.filter_by(role_name='user').first()
+
         new_user = User(email=email,
                         firstname=firstname,
                         lastname=lastname,
-                        password=password)
+                        password=password,
+                        role=user_role)
 
         try:
             new_user.save()

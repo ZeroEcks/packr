@@ -1,34 +1,13 @@
-<!-- Access to this page only for logged in employees -->
 <md-content layout-padding>
     <div layout="row" layout-align="center">
-	    <h2>Update Consignment</h2>
+	    <h2>Update Status</h2>
     </div>
 
-	<form flex name="$ctrl.searchForm" ng-submit="search()">
-        <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Consignment Number</label>
-                <input name="number" ng-model="con_number" required>
-            </md-input-container>
-            <md-button class="md-raised" type="submit">Search</md-button>
-        </div>
-    </form>
-
-    <form flex name="$ctrl.driverForm" ng-submit="submit()" ng-if="found">
-        <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Driver Comments</label>
-                <textarea ng-model="driver.adminComments" md-maxlength="300" rows="5" md-select-on-focus></textarea>
-            </md-input-container>
-        </div>
-
-        <div>
-            <md-button class="md-raised" type="submit">Update</md-button>
-        </div>
-	</form>
-    <br><br><br>
-    <form flex name="$ctrl.statusForm" ng-submit="submitStatus()" ng-if="found">
-        <h2>Update Status</h2>
+    <form flex name="$ctrl.statusForm" ng-submit="submitStatus()">
+        <md-input-container class="md-block" flex-gt-sm>
+            <label>Consignment Number</label>
+            <input name="number" ng-model="con_number" required>
+        </md-input-container>
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Booking Status</label>

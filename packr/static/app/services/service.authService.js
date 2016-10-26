@@ -32,7 +32,7 @@
             }));
             DataService.get('/api/user', self.user)
                 .then(function(result) {
-                    $window.localStorage.setItem('detailedUser', angular.fromJson(result));
+                    $window.localStorage.setItem('detailedUser', result);
             });
         }
 
@@ -76,6 +76,7 @@
             var userInfo = angular.fromJson($window.localStorage.getItem('user'));
             if (angular.isObject(userInfo) && angular.isDefined(userInfo.token)) {
                 $window.localStorage.removeItem('user');
+                $window.localStorage.removeItem('detailedUser');
                 $location.path('/');
             }
         }

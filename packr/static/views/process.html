@@ -1,0 +1,46 @@
+<!-- Access to this page only for logged in employees -->
+<md-content layout-padding>
+    <div layout="row" layout-align="center">
+	    <h2>Process Booking</h2>
+    </div>
+
+	<form flex name="$ctrl.searchForm" ng-submit="search()">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Consignment Number</label>
+                <input name="number" ng-model="con_number" required>
+            </md-input-container>
+            <md-button class="md-raised" type="submit">Search</md-button>
+        </div>
+    </form>
+
+    <form flex name="$ctrl.processForm" ng-submit="submit()" ng-if="found">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Driver</label>
+                <md-select name="type" ng-model="driver.driver" required>
+                    <md-option ng-repeat="driver in driver.drivers" value="{{driver.id}}">{{driver.full_name}}</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Cost</label>
+		        <input type="number" ng-model="driver.cost" name="cost">
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>ETA</label>
+                <md-datepicker ng-model="driver.eta" md-placeholder="Enter date" required></md-datepicker>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-button class="md-raised" type="submit">Update</md-button>
+            <md-button class="md-raised" type="submit" ng-click="markProcessed()">Mark as Processed</md-button>
+        </div>
+	</form>
+</md-content>
