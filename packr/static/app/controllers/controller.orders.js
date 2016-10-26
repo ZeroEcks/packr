@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ErrorHelperService', '$location', '$scope'];
-    function ordersController(DataService, ErrorHelperService, $location, $scope) {
+    var deps = ['DataService', 'ToastService', '$location', '$scope'];
+    function ordersController(DataService, ToastService, $location, $scope) {
         var self = this; // jshint ignore:line
         $scope.orders = {
             orders: [
@@ -13,11 +13,9 @@
         DataService.post('/api/orders/', {})
             .then(function (data) {
                 $scope.orders.orders = data.orders;
-
-                console.log($scope.orders);
             })
             .catch(function (error) {
-                ErrorHelperService.displayInputControlError(error.message, self.trackForm);
+                ToastService.createWarningToast(error.message);
             });
 
         $scope.newOrder = function () {
@@ -25,7 +23,7 @@
         };
 
         $scope.trackOrder = function (order) {
-            $location.path('/track?id=' + order);
+            $location.path('/track').search({id: order});
         };
     }
 
