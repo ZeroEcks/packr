@@ -76,6 +76,12 @@
                     'requiresLogin': requiresLogin
                 }
             })
+            .when('/roles', {
+                template: '<roles></roles>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })

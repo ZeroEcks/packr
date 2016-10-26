@@ -1,0 +1,45 @@
+<!-- viewable by admins only -->
+<md-content layout-padding>
+    <div layout="row" layout-align="center">
+	    <h2>Update User Roles</h2>
+    </div>
+	<form flex name="$ctrl.roleForm" ng-submit="submit()">
+        <div layout="row" layout-align="center">
+            <table name="roles" ng-model="roles.users">
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+                <tr ng-repeat="user in roles.users">
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="number" ng-model="user.id" disabled>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="number" ng-model="user.fullName" disabled>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <input name="number" ng-model="user.email" disabled>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-input-container class="md-block" flex-gt-sm>
+                            <md-select name="type" ng-model="user.role" required>
+                                <md-option ng-repeat="role in roles.roles" value="{{role.roleName}}">{{role.roleName}}</md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td>
+                        <md-button class="md-raised" ng-click="update(user.id)"><md-icon>check_circle</md-icon></md-button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+	</form>
+</md-content>
