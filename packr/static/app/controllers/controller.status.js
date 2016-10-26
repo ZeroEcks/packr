@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ErrorHelperService', '$scope', '$location'];
-    function statusController(DataService, ErrorHelperService, $scope, $location) {
+    var deps = ['DataService', 'ErrorHelperService', '$scope', '$location', '$routeParams'];
+    function statusController(DataService, ErrorHelperService, $scope, $location, $routeParams) {
         var self = this; // jshint ignore:line
         $scope.con_number = '';
         $scope.status = {
