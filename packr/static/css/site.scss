@@ -14,18 +14,6 @@ html, body, .md-sidenav-left {
     height: 100%;
 }
 
-#about-body {
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-size: cover;
-	background: url(../img/banner.jpg) no-repeat fixed top center;
-}
-
-#about-text {
-	background-color: #9C27B0;
-	color: white;
-}
-
 #warning-toast .md-toast-content {
     background-color: #9C1A1C;
 }
@@ -45,34 +33,4 @@ html, body, .md-sidenav-left {
 
 #footer a {
 	color: white;
-}
-
-#about-body {
-	-moz-background-size: cover;
-	-webkit-background-size: cover;
-	background-size: cover;
-	background: url(../img/banner.jpg) no-repeat fixed top center;
-}
-#about p {
-	padding: 5px;
-}
-
-/* make these into classes */
-#about-text {
-	background-color: #9C27B0;
-	color: white;
-}
-
-#about {
-	text-align: center;
-	margin-left: 200px;
-	margin-right: 200px;
-}
-
-h1 {
-	color: #9C27B0;
-	font-weight: bold;
-	font-size: 400%;
-	display: inline;
-	padding: 5px;
 }

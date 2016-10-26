@@ -106,6 +106,15 @@
             .when('/why-us', {
                 templateUrl: 'static/views/why-us.html'
             })
+            .when('/faq', {
+                templateUrl: 'static/views/faq.html'
+            })
+            .when('/terms', {
+                templateUrl: 'static/views/terms.html'
+            })
+            .when('/privacy', {
+                templateUrl: 'static/views/privacy.html'
+            })
             .otherwise({
                 templateUrl: 'static/views/404.html'
             });

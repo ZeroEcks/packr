@@ -8,6 +8,18 @@
         self.goAbout = function () {
             $location.path('/about');
         };
+
+        self.goFAQ = function () {
+            $location.path('/faq');
+        };
+
+        self.goTerms = function () {
+            $location.path('/terms');
+        };
+
+        self.goPrivacy = function () {
+            $location.path('/privacy');
+        };
     }
 
     footerController.$inject = deps;
