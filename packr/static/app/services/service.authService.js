@@ -32,7 +32,7 @@
             }));
             DataService.get('/api/user', self.user)
                 .then(function(result) {
-                    $window.localStorage.setItem('detailedUser', result);
+                    $window.localStorage.setItem('detailedUser', angular.fromJson(result));
             });
         }
 
