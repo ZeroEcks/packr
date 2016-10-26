@@ -69,8 +69,19 @@ def reset():
         if os.path.isfile(DevConfig.DB_PATH):
             os.remove(DevConfig.DB_PATH)
     except Exception as e:
-        print(e.with_traceback())
-        return 1
+        print(e)
+
+    print("Running init")
+    manager.handle('manage.py', ['db', 'init'])
+
+    print("Running migrate")
+    manager.handle('manage.py', ['db', 'migrate'])
+
+    print("Running upgrade")
+    manager.handle('manage.py', ['db', 'upgrade'])
+
+    print("Running setup_db")
+    setup_db()
     return 0
 
 
