@@ -16,6 +16,10 @@ class Role(SurrogatePK, Model):
         """Create instance."""
         db.Model.__init__(self, **kwargs)
 
+    def __str__(self):
+        """Represent instance as a string."""
+        return '{name}'.format(name=self.role_name)
+
     def __repr__(self):
         """Represent instance as a unique string."""
         return '<Role({name})>'.format(name=self.role_name)
