@@ -1,0 +1,49 @@
+<!-- This page should only be available to customers that are logged in -->
+<md-content layout-padding>
+    <div layout="row" layout-align="center">
+	    <h2>Your Orders</h2>
+    </div>
+    <!-- Picked up, Warehouse, Delivered -->
+    <div layout="row" layout-align="center">
+        <table name="orders" ng-model="orders.orders">
+            <tr>
+                <th>Date Created</th>
+                <th>Cost</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+            <tr ng-repeat="order in orders.orders">
+                <td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="text" ng-model="order.createdAt" disabled>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="text" ng-model="order.cost" disabled>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="text" ng-model="order.lastUpdate" disabled>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <md-button class="md-raised" ng-click="trackOrder(order.id)">Track</md-button>
+                        <md-button class="md-raised" ng-click="conNote(order.id)">View Con Note</md-button>
+                        <md-button class="md-raised" ng-click="process(order.id)" ng-if="admin">Process Order</md-button>
+                        <md-button class="md-raised" ng-click="driverNotes(order.id)" ng-if="driver">Update Notes</md-button>
+                        <md-button class="md-raised" ng-click="statusUpdate(order.id)" ng-if="driver || admin">Update Status</md-button>
+                    </md-input-container>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <form flex name="$ctrl.newForm" ng-submit="newOrder()">
+        <div layout="row" layout-align="center">
+            <md-button class="md-raised" type="submit">Create Order</md-button>
+        </div>
+    </form>
+</md-content>

@@ -3,10 +3,6 @@
     min-width: 250px;
 }
 
-.sidenav-left-toolbar {
-    /*border-bottom: 1px solid #e0e0e0;*/
-}
-
 @media (min-width: 1280px) {
     sidenav {
         /* This is what sidebars are expected to have */
@@ -20,4 +16,21 @@ html, body, .md-sidenav-left {
 
 #warning-toast .md-toast-content {
     background-color: #9C1A1C;
+}
+
+#toolbar-nav {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#footer {
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 0;
+	background-color: #9C27B0;	
+	color: white;
+}
+
+#footer a {
+	color: white;
 }

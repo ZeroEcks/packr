@@ -1,0 +1,132 @@
+<!-- This page should send an email to the admin, with the submitted data -->
+<md-content layout-padding>
+    <div layout="row" layout-align="center">
+	    <h2>Request a Quote</h2>
+    </div>
+	<form flex name="$ctrl.quoteForm" ng-submit="submit()">
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Business Name</label>
+                <input ng-model="quote.businessName">
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Contact Name</label>
+                <input ng-model="quote.contactName" required>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Phone</label>
+                <input name="phone" ng-model="quote.phone" ng-pattern="/^[0-9]{4} [0-9]{3} [0-9]{3}$/" required>
+                <div class="hint">#### ### ###</div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Email</label>
+                <input name="email" ng-model="quote.email" ng-pattern="/^.+@.+\..+$/" required>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Service Type</label>
+                <md-select name="type" ng-model="quote.type" required>
+                    <md-option value="standard">Standard</md-option>
+                    <md-option value="express">Express</md-option>
+                    <md-option value="overnight">Overnight</md-option>
+                    <md-option value="dangerous">Dangerous Goods</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm ng-if="quote.type === 'dangerous'">
+                <label>Dangerous Goods Type</label>
+                <md-select name="type" ng-model="quote.dangerous" required>
+                    <md-option value="none">No Dangerous Goods</md-option>
+                    <md-option value="explosives">Explosives</md-option>
+                    <md-option value="gases">Gases</md-option>
+                    <md-option value="flammable">Flammable Substances</md-option>
+                    <md-option value="oxidizing">Oxidizing Substances</md-option>
+                    <md-option value="toxic">Toxic Substances</md-option>
+                    <md-option value="corrosives">Corrosives</md-option>
+                    <md-option value="misc">Miscellaneous</md-option>
+                </md-select>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Street Name and Number</label>
+                <input name="text" ng-model="quote.street" required>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Suburb</label>
+                <input name="text" ng-model="quote.suburb" required>
+            </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>State</label>
+                <md-select name="type" ng-model="quote.state" required>
+                    <md-option value="act">ACT</md-option>
+                    <md-option value="new_south_wales">New South Wales</md-option>
+                    <md-option value="queensland">Queensland</md-option>
+                    <md-option value="victoria">Victoria</md-option>
+                    <md-option value="south_australia">South Australia</md-option>
+                    <md-option value="western_australia">Western Australia</md-option>
+                    <md-option value="tasmania">Tasmania</md-option>
+                    <md-option value="northern_territory">Northern Territory</md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Post Code</label>
+                <input name="postalCode" ng-model="quote.postCode" required ng-pattern="/^[0-9]{4}$/" md-maxlength="4" required>
+            </md-input-container>
+        </div>
+
+		<h3>Packages:</h3>
+		<table name="packages" ng-model="quote.packages">
+			<tr>
+				<th>Weight (kg)</th>
+				<th>Length (cm)</th>
+				<th>Width (cm)</th>
+				<th>Height (cm)</th>
+			</tr>
+			<tr ng-repeat="package in quote.packages">
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.weight" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.length" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.width" required>
+                    </md-input-container>
+                </td>
+				<td>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <input name="number" ng-model="package.height" required>
+                    </md-input-container>
+                </td>
+                <td>
+                    <md-button class="md-raised" ng-click="removePackage($index)"><md-icon>clear</md-icon></md-button>
+                </td>
+			</tr>
+		</table>
+        <div>
+            <md-button class="md-raised" ng-click="addPackage()"><md-icon>add</md-icon></md-button>
+        </div>
+        <br><br><br>
+        <div layout="row" layout-align="center">
+            <md-button class="md-raised" type="submit">Request a Quote</md-button>
+        </div>
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Resultant Quote (AUD)</label>
+                <input name="number" ng-model="quote.result" disabled>
+            </md-input-container>
+        </div>
+	</form>
+</md-content>

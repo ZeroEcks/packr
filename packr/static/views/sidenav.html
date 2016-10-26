@@ -4,7 +4,35 @@
     md-is-locked-open="$mdMedia('gt-md')"
     md-whiteframe="2">
     <md-toolbar class="sidenav-left-toolbar md-toolbar-tools" md-whiteframe="1">
-        <h2><span>Packr</span></h2>
+        <h2><md-button ng-click="$ctrl.goHome()">On The Spot</md-button></h2>
     </md-toolbar>
-    <md-content layout-padding>Ayy lmao</md-content>
+    <md-content layout-padding>
+        <md-button ng-click="$ctrl.goBook()">
+            Make a Booking
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goTrack()">
+            Track a Parcel
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goOrders()">
+            View your Orders
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goQuote()">
+            Get a Quote
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goServices()">
+            Our Services
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goWhyUs()">
+            Why Choose Us?
+        </md-button>
+        <br>
+        <md-button ng-click="$ctrl.goContact()">
+            Contact Us
+        </md-button>
+    </md-content>
 </md-sidenav>

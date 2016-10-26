@@ -28,6 +28,9 @@
             .when('/', {
                 templateUrl: 'static/views/home.html'
             })
+            .when('/contact', {
+                template: '<contact></contact>'
+            })
             .when('/register', {
                 template: '<register></register>',
                 resolve: {
@@ -45,6 +48,72 @@
                 resolve: {
                     'requiresLogin': requiresLogin
                 }
+            })
+            .when('/about', {
+                templateUrl: 'static/views/about.html'
+            })
+            .when('/book', {
+                template: '<booking></booking>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/driver', {
+                template: '<driver></driver>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/quote', {
+                template: '<quote></quote>'
+            })
+            .when('/track', {
+                template: '<track></track>'
+            })
+            .when('/orders', {
+                template: '<orders></orders>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/roles', {
+                template: '<roles></roles>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/view-order', {
+                template: '<vieworder></vieworder>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/process', {
+                template: '<process></process>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/status', {
+                template: '<status></status>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/services', {
+                templateUrl: 'static/views/services.html'
+            })
+            .when('/why-us', {
+                templateUrl: 'static/views/why-us.html'
+            })
+            .when('/faq', {
+                templateUrl: 'static/views/faq.html'
+            })
+            .when('/terms', {
+                templateUrl: 'static/views/terms.html'
+            })
+            .when('/privacy', {
+                templateUrl: 'static/views/privacy.html'
             })
             .otherwise({
                 templateUrl: 'static/views/404.html'

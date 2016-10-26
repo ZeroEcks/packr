@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Management script."""
+import datetime
 import os
 from glob import glob
 from subprocess import call
@@ -12,7 +13,9 @@ from flask_script.commands import Clean, ShowUrls
 
 from packr.app import create_app
 from packr.extensions import db
-from packr.settings import DevConfig, ProdConfig
+from packr.models import Role
+from packr.models import User
+from packr.settings import DevConfig, ProdConfig, TestConfig
 
 CONFIG = ProdConfig if os.environ.get('PACKR_ENV') == 'prod' else DevConfig
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -48,6 +51,7 @@ def _make_context():
 def test():
     """Run the tests."""
     import pytest
+    CONFIG = TestConfig  # noqa
     exit_code = pytest.main([TEST_PATH, '--verbose'])
     return exit_code
 
@@ -65,9 +69,46 @@ def reset():
         if os.path.isfile(DevConfig.DB_PATH):
             os.remove(DevConfig.DB_PATH)
     except Exception as e:
-        print(e.with_traceback())
-        return 1
+        print(e)
+
+    print("Running init")
+    manager.handle('manage.py', ['db', 'init'])
+
+    print("Running migrate")
+    manager.handle('manage.py', ['db', 'migrate'])
+
+    print("Running upgrade")
+    manager.handle('manage.py', ['db', 'upgrade'])
+
+    print("Running setup_db")
+    setup_db()
     return 0
+
+
+@manager.command
+def setup_db():
+    """Setup the database with initial values"""
+
+    for line in open('setup.sql'):
+        if line:
+            db.session.execute(line)
+            db.session.commit()
+
+
+@manager.command
+def make_admin_account(email, password, firstname, lastname):
+    """Created an admin account"""
+
+    admin_role = Role.query.filter_by(role_name='admin').first()
+
+    user = User(email=email,
+                password=password,
+                firstname=firstname,
+                lastname=lastname,
+                role=admin_role,
+                created_at=datetime.datetime.utcnow())
+
+    user.save()
 
 
 class Lint(Command):
