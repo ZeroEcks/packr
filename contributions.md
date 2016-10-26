@@ -1,3 +1,4 @@
+```
 Total lines committed by author by file
                      file                    author    added  removed   pct add
                  .bowerrc    0%
@@ -491,3 +492,4 @@ Total lines in the final project by author
            Matthew Miller     4572       41%
              Melody Kelly     6475       58%
                     total    11131      100%
+```
