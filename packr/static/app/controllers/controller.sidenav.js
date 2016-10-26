@@ -1,9 +1,11 @@
 (function () {
     'use strict';
 
-    var deps = ['$scope', '$location', '$mdSidenav'];
-    function sidenavController($scope, $location, $mdSidenav) {
+    var deps = ['$scope', '$location', '$mdSidenav', '$window'];
+    function sidenavController($scope, $location, $mdSidenav, $window) {
         var self = this; // jshint ignore:line
+
+        $scope.admin = angular.fromJson($window.localStorage.getItem('detailedUser')).role_id == 3;
 
         $scope.$on('toggleLeft', function(event, mass) { buildToggler('left')();});
         function buildToggler(componentId) {
@@ -42,6 +44,10 @@
 
         self.goHome = function () {
             $location.path('/');
+        };
+
+        self.goRoles = function () {
+            $location.path('/roles');
         };
     }
 

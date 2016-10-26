@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ToastService', '$location', '$scope', '$window'];
-    function ordersController(DataService, ToastService, $location, $scope, $window) {
+    var deps = ['DataService', 'ToastService', '$location', '$scope', '$window', '$filter'];
+    function ordersController(DataService, ToastService, $location, $scope, $window, $filter) {
         var self = this; // jshint ignore:line
         $scope.orders = {
             orders: [
@@ -15,10 +15,14 @@
 
         DataService.post('/api/orders/', {})
             .then(function (data) {
+                for (var i = 0; i < data.orders.length; i++) {
+                    data.orders[i].createdAt = $filter('date')(data.orders[i].createdAt, 'short');
+                    data.orders[i].lastUpdate = $filter('date')(data.orders[i].lastUpdate, 'short');
+                }
                 $scope.orders.orders = data.orders;
             })
             .catch(function (error) {
-                ToastService.createWarningToast(error.message);
+                ToastService.propagateWarningToast(error.message);
             });
 
         $scope.newOrder = function () {

@@ -31,13 +31,16 @@ class OrdersItem(Resource):
 
         for order in orders_source:
             last_update = datetime.datetime.fromtimestamp(0)
+            last_status = ''
             for status in order.status:
                 if status.time > last_update:
                     last_update = status.time
+                    last_status = status.status.status
             orders_list.append({
                 'createdAt': order.created_at.strftime('%Y-%m-%dT%H:%M:%S'),
                 'cost': order.cost,
                 'lastUpdate': last_update.strftime('%Y-%m-%dT%H:%M:%S'),
+                'lastStatus': last_status,
                 'id': order.id
             })
 

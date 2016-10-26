@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ErrorHelperService', '$scope', '$routeParams'];
-    function viewOrderController(DataService, ErrorHelperService, $scope, $routeParams) {
+    var deps = ['DataService', 'ErrorHelperService', '$scope', '$routeParams', '$filter'];
+    function viewOrderController(DataService, ErrorHelperService, $scope, $routeParams, $filter) {
         var self = this; // jshint ignore:line
         $scope.con_number = '';
         $scope.found = false;
@@ -61,6 +61,9 @@
                             $scope.driver.driver = $scope.driver.drivers[i].full_name;
                             break;
                         }
+                    }
+                    for (i = 0; i < $scope.driver.statuses.length; i++) {
+                        $scope.driver.statuses[i].date = $filter('date')($scope.driver.statuses[i].date, 'short');
                     }
                     $scope.found = true;
                 })

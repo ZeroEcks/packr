@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['DataService', 'ErrorHelperService', '$scope', '$location'];
-    function processController(DataService, ErrorHelperService, $scope, $location) {
+    var deps = ['DataService', 'ErrorHelperService', '$scope', '$location', '$routeParams'];
+    function processController(DataService, ErrorHelperService, $scope, $location, $routeParams) {
         var self = this; // jshint ignore:line
         $scope.con_number = '';
         $scope.found = false;
@@ -39,6 +39,7 @@
 
             DataService.post('/api/update/admin', send_data)
                 .then(function (data) {
+                    $scope.markProcessed();
                     $scope.search(); //Update the form.
                 })
                 .catch(function (error) {
@@ -62,6 +63,11 @@
                     ErrorHelperService.displayInputControlError(error.message, self.statusForm);
                 });
         };
+
+        if ($routeParams.id !== undefined) {
+            $scope.con_number = $routeParams.id;
+            $scope.search();
+        }
     }
 
     processController.$inject = deps;
