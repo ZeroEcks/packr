@@ -1,8 +1,9 @@
 import re
+import jsonpickle
 
 from flask_restplus import Namespace, Resource, fields, reqparse
 from sqlalchemy.exc import IntegrityError
-
+from flask_jwt import current_identity, jwt_required
 from packr.models import User
 
 api = Namespace('user',
@@ -24,6 +25,12 @@ user = api.model('User', {
 
 @api.route('/')
 class UserItem(Resource):
+    @jwt_required()
+    def get(self):
+        """
+        Gives you details about the current user
+        """
+        return jsonpickle.encode(current_identity)
 
     @api.expect(user)
     @api.response(204, 'User successfully updated.')

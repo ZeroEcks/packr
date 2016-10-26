@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var deps = ['ToastService', '$window', '$q', '$location'];
-    function authService (ToastService, $window, $q, $location) {
+    var deps = ['DataService', 'ToastService', '$window', '$q', '$location'];
+    function authService (DataService, ToastService, $window, $q, $location) {
         return {
             parseToken: parseToken,
             setLocalUser: setLocalUser,
@@ -28,8 +28,12 @@
         function setLocalUser(token, firstname) {
             $window.localStorage.setItem('user', angular.toJson({
                 token: token,
-                firstname: firstname
+                firstname: firstname,
             }));
+            DataService.get('/api/user', self.user)
+                .then(function(result) {
+                    $window.localStorage.setItem('detailedUser', angular.fromJson(result));
+            });
         }
 
         function setAuthHeaders(config) {

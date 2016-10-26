@@ -39,3 +39,4 @@ waitress==1.0.0
 WebOb==1.6.1
 WebTest==2.0.23
 Werkzeug==0.11.5
+jsonpickle==0.9.3
