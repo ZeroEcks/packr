@@ -1,7 +1,7 @@
 <!-- Access to this page only for logged in employees -->
 <md-content layout-padding>
     <div layout="row" layout-align="center">
-	    <h2>Update Consignment</h2>
+	    <h2>View Consignment</h2>
     </div>
 
 	<form flex name="$ctrl.searchForm" ng-submit="search()">
@@ -14,7 +14,7 @@
         </div>
     </form>
 
-    <form flex name="$ctrl.driverForm" ng-submit="submit()" ng-if="found">
+    <form flex name="$ctrl.viewForm" ng-submit="submit()" ng-if="found">
         <h3>Details</h3>
 
         <div layout-gt-sm="row">
@@ -184,11 +184,38 @@
 
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
+                <label>Driver Comments</label>
+                <textarea ng-model="driver.adminComments" md-maxlength="300" rows="5" md-select-on-focus disabled></textarea>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
                 <label>Customer Comments</label>
                 <textarea ng-model="driver.customerComments" md-maxlength="300" rows="5" md-select-on-focus disabled></textarea>
             </md-input-container>
         </div>
 
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Driver</label>
+		        <input type="driver" ng-model="driver.driver" name="driver" disabled>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>Cost</label>
+		        <input type="number" ng-model="driver.cost" name="cost" disabled>
+            </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+                <label>ETA</label>
+                <md-datepicker ng-model="driver.eta" md-placeholder="Enter date" disabled></md-datepicker>
+            </md-input-container>
+        </div>
 
         <h3>Statuses:</h3>
         <table name="statuses" ng-model="driver.statuses">
@@ -247,44 +274,5 @@
                 </td>
 			</tr>
 		</table>
-		<br>
-        <h3>Modifiable</h3>
-
-        <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Driver Comments</label>
-                <textarea ng-model="driver.adminComments" md-maxlength="300" rows="5" md-select-on-focus></textarea>
-            </md-input-container>
-        </div>
-
-        <div>
-            <md-button class="md-raised" type="submit">Update</md-button>
-        </div>
 	</form>
-    <br><br><br>
-    <form flex name="$ctrl.statusForm" ng-submit="submitStatus()" ng-if="found">
-        <h2>Update Status</h2>
-        <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Booking Status</label>
-                <md-select name="type" ng-model="status.status" required>
-                    <md-option value="booked">Booked</md-option>
-                    <md-option value="processed">Processed</md-option>
-                    <md-option value="picked_up">Picked Up</md-option>
-                    <md-option value="wh_in">Warehouse (Scanned In)</md-option>
-                    <md-option value="wh_stored">Warehouse (Storage)</md-option>
-                    <md-option value="wh_out">Warehouse (Scanned Out)</md-option>
-                    <md-option value="delivered">Delivered</md-option>
-                </md-select>
-            </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
-                <label>Location</label>
-		        <input type="text" ng-model="status.address" name="location" required>
-            </md-input-container>
-        </div>
-
-        <div>
-            <md-button class="md-raised" type="submit">Update Status</md-button>
-        </div>
-    </form>
 </md-content>

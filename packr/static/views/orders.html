@@ -10,7 +10,7 @@
                 <th>Date Created</th>
                 <th>Cost</th>
                 <th>Last Updated</th>
-                <th>Track</th>
+                <th>Actions</th>
             </tr>
             <tr ng-repeat="order in orders.orders">
                 <td>
@@ -31,6 +31,7 @@
                 <td>
                     <md-input-container class="md-block" flex-gt-sm>
                         <md-button class="md-raised" ng-click="trackOrder(order.id)">Track</md-button>
+                        <md-button class="md-raised" ng-click="conNote(order.id)">View Con Note</md-button>
                     </md-input-container>
                 </td>
             </tr>

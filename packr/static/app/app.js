@@ -82,6 +82,18 @@
                     'requiresLogin': requiresLogin
                 }
             })
+            .when('/view-order', {
+                template: '<vieworder></vieworder>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
+            .when('/process', {
+                template: '<process></process>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })

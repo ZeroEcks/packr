@@ -20,7 +20,16 @@ class OrdersItem(Resource):
     def post(self):
         orders_list = list()
 
-        for order in Order.query.filter_by(user_id=current_identity.id):
+        orders_source = None
+        if current_identity.role.role_name == 'user':
+            orders_source = Order.query.filter_by(user_id=current_identity.id)
+        elif current_identity.role.role_name == 'driver':
+            orders_source = Order.query.filter_by(
+                driver_id=current_identity.id)
+        elif current_identity.role.role_name == 'admin':
+            orders_source = Order.query
+
+        for order in orders_source:
             last_update = datetime.datetime.fromtimestamp(0)
             for status in order.status:
                 if status.time > last_update:

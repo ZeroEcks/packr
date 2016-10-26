@@ -25,6 +25,10 @@
         $scope.trackOrder = function (order) {
             $location.path('/track').search({id: order});
         };
+
+        $scope.conNote = function (order) {
+            $location.path('/view-order').search({id: order});
+        };
     }
 
     ordersController.$inject = deps;
