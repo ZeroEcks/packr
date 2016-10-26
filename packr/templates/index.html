@@ -12,11 +12,11 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body ng-app="App" ng-cloak>
-        <section layout="row">
+        <section layout="row" layout-fill>
             <sidenav></sidenav>
             <div layout="column" flex>
                 <navbar></navbar>
-                <div ng-view ng-cloak flex layout="column"></div>
+                <main ng-view ng-cloak flex layout="column"></main>
                 <footer></footer>
             </div>
         </section>
