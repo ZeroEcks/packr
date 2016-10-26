@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var sass = require('gulp-sass');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var concatCss = require('gulp-concat-css');
@@ -23,7 +22,7 @@ var images = [
     'packr/static/img/**/*'
 ];
 var angularAppJs = ['packr/static/app/**/*.js'];
-var angularAppScss = ['packr/static/css/*.scss'];
+var angularAppScss = ['packr/static/css/*.css'];
 
 // Tasks
 gulp.task('jshint', function () {
@@ -44,9 +43,8 @@ gulp.task('concat-app-js', function () {
         .pipe(gulp.dest('packr/static/public/')) ;
 });
 
-gulp.task('sass', function () {
+gulp.task('css', function () {
     return gulp.src(angularAppScss)
-        .pipe(sass().on('error', sass.logError))
         .pipe(concatCss('app-bundle-styles.css'))
         .pipe(gulp.dest('packr/static/public/'));
 });
@@ -68,5 +66,5 @@ gulp.task('move-images', function () {
        .pipe(gulp.dest('packr/static/public/img/'))
 });
 
-gulp.task('build-app', ['concat-app-js', 'jshint', 'sass', 'concat-libs-js', 'concat-libs-css', 'move-images']);
+gulp.task('build-app', ['concat-app-js', 'jshint', 'css', 'concat-libs-js', 'concat-libs-css', 'move-images']);
 gulp.task('default', ['jshint', 'build-app', 'watch']);

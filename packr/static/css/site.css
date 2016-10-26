@@ -14,6 +14,10 @@ html, body, .md-sidenav-left {
     height: 100%;
 }
 
+main {
+  overflow-y: auto;
+}
+
 #warning-toast .md-toast-content {
     background-color: #9C1A1C;
 }

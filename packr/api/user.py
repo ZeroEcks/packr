@@ -1,11 +1,11 @@
 import re
-import jsonpickle
 
+import jsonpickle
+from flask_jwt import current_identity, jwt_required
 from flask_restplus import Namespace, Resource, fields, reqparse
 from sqlalchemy.exc import IntegrityError
-from flask_jwt import current_identity, jwt_required
 
-from packr.models import User, Role
+from packr.models import Role, User
 
 api = Namespace('user',
                 description='Operations related to the current user')
