@@ -8,7 +8,7 @@
         $scope.found = false;
 
         $scope.driver = {
-            driver: "",
+            driver: -1,
             type: "",
             dangerous: "none",
             pickup: {
@@ -42,6 +42,8 @@
             statuses: [
             ],
             packages: [
+            ],
+            drivers: [
             ]
         };
 
@@ -52,7 +54,6 @@
 
         $scope.submitStatus = function () {
             var send_data = {con_number: $scope.con_number, status: $scope.status};
-
             send_data.status = JSON.stringify(send_data.status);
 
             DataService.post('/api/update/status', send_data)
@@ -82,14 +83,16 @@
         };
 
         $scope.submit = function () {
-            var send_data = {con_number: $scope.con_number};
+            var send_data = {con_number: $scope.con_number,
+                driver: $scope.driver.driver,
+                eta: $scope.driver.eta,
+                cost: $scope.driver.cost,
+                adminComments: $scope.driver.adminComments
+            };
 
             DataService.post('/api/update/driver', send_data)
                 .then(function (data) {
-                    $scope.track.eta = data.eta;
-                    $scope.track.pickup_address = data.pickup_address;
-                    $scope.track.delivery_address = data.delivery_address;
-                    $scope.track.statuses = data.statuses;
+                    $scope.search(); //Update the form.
                 })
                 .catch(function (error) {
                     ErrorHelperService.displayInputControlError(error.message, self.driverForm);

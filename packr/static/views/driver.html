@@ -252,7 +252,9 @@
         <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
                 <label>Driver</label>
-		        <input type="text" ng-model="driver.driver" name="driver">
+                <md-select name="type" ng-model="driver.driver" required>
+                    <md-option ng-repeat="driver in driver.drivers" value="{{driver.id}}">{{driver.full_name}}</md-option>
+                </md-select>
             </md-input-container>
         </div>
 

@@ -2,7 +2,7 @@ import datetime
 
 from flask_restplus import Namespace, Resource, fields, reqparse
 
-from packr.models import Order
+from packr.models import Order, Role, User
 
 api = Namespace('lookup',
                 description='Operations related to looking up an order')
@@ -88,11 +88,21 @@ class LookupItem(Resource):
 
         driver = ''
         if order.driver:
-            driver = order.driver.full_name
+            driver = order.driver.id
+
+        driver_role = Role.query.filter_by(role_name='driver').first()
+
+        drivers = list()
+        for driv in User.query.filter_by(role=driver_role):
+            drivers.append({
+                'id': driv.id,
+                'full_name': driv.full_name
+            })
 
         return {'eta': order.eta.strftime('%Y-%m-%d'),
                 'type': order.service_type.name,
                 'driver': driver,
+                'drivers': drivers,
                 'cost': order.cost,
                 'paymentType': order.payment_type,
                 'fragile': ('yes' if order.fragile else 'no'),

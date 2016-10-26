@@ -3,7 +3,6 @@ import re
 
 import datetime
 
-import dateutil
 from flask_restplus import Namespace, Resource, fields, reqparse
 from flask_jwt import current_identity, jwt_required
 
