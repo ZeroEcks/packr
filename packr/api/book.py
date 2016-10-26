@@ -1,13 +1,12 @@
+import datetime
 import json
 import re
 
-import datetime
-
-from flask_restplus import Namespace, Resource, fields, reqparse
 from flask_jwt import current_identity, jwt_required
+from flask_restplus import Namespace, Resource, fields, reqparse
 
-from packr.models import Contact, Address, Order, Package, DangerClass, \
-    ServiceType, OrderStatus, StatusType
+from packr.models import (Address, Contact, DangerClass, Order, OrderStatus,
+                          Package, ServiceType, StatusType)
 
 api = Namespace('book',
                 description='Operations related to creating a booking')
