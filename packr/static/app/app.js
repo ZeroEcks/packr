@@ -94,6 +94,12 @@
                     'requiresLogin': requiresLogin
                 }
             })
+            .when('/status', {
+                template: '<status></status>',
+                resolve: {
+                    'requiresLogin': requiresLogin
+                }
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })

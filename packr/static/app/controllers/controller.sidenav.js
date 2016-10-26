@@ -36,6 +36,10 @@
             $location.path('/book');
         };
 
+        self.goOrders = function () {
+            $location.path('/orders');
+        };
+
         self.goHome = function () {
             $location.path('/');
         };
