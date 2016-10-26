@@ -205,8 +205,8 @@ class BookItem(Resource):
             weight += float(package['weight'])
 
         danger_class = DangerClass.query.filter_by(name=dangerous).first()
-        service_type = ServiceType.query.filter_by(name=
-                                                   service_type_name).first()
+        service_type = ServiceType.query.filter_by(name=service_type_name).\
+            first()
 
         date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
 

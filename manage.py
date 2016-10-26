@@ -13,8 +13,7 @@ from flask_script.commands import Clean, ShowUrls
 
 from packr.app import create_app
 from packr.extensions import db
-from packr.models import Role
-from packr.models import User
+from packr.models import Role, User
 from packr.settings import DevConfig, ProdConfig, TestConfig
 
 CONFIG = ProdConfig if os.environ.get('PACKR_ENV') == 'prod' else DevConfig
