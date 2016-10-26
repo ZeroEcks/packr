@@ -67,6 +67,9 @@
             .when('/track', {
                 template: '<track></track>'
             })
+            .when('/orders', {
+                template: '<orders></orders>'
+            })
             .when('/services', {
                 templateUrl: 'static/views/services.html'
             })
