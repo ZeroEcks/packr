@@ -16,6 +16,7 @@ INSERT INTO service_types (`name`) VALUES ('dangerous');
 
 -- Status Types
 INSERT INTO status_types (`name`, `status`) VALUES ('booked', 'Booked');
+INSERT INTO status_types (`name`, `status`) VALUES ('processed', 'Processed');
 INSERT INTO status_types (`name`, `status`) VALUES ('picked_up', 'Picked Up');
 INSERT INTO status_types (`name`, `status`) VALUES ('wh_in', 'Warehouse (Scanned In)');
 INSERT INTO status_types (`name`, `status`) VALUES ('wh_stored', 'Warehouse (Storage)');
