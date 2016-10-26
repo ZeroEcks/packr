@@ -26,7 +26,7 @@
 
         $routeProvider
             .when('/', {
-                templateUrl: 'static/views/home.html'
+                template: '<home></home>'
             })
             .when('/contact', {
                 template: '<contact></contact>'
