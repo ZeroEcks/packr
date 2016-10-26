@@ -54,7 +54,7 @@ class UpdateStatus(Resource):
 
         if con_number == -1:
             return {'message': {'con_number':
-                                    'No consignment number provided'}}, 400
+                                'No consignment number provided'}}, 400
 
         # Find the consignment note information.
         order = Order.query.filter_by(id=con_number).first()
@@ -64,9 +64,9 @@ class UpdateStatus(Resource):
         if current_identity.role.role_name != 'admin':
             if current_identity.role.role_name == 'driver':
                 if order.driver_id != current_identity.id:
-                    return {'description': 'Access denied.'}, 403
+                    return {'description': 'Access denied.'}, 401
             else:
-                return {'description': 'Access denied.'}, 403
+                return {'description': 'Access denied.'}, 401
 
         status_type = StatusType.query.filter_by(name=status['status']).first()
 
@@ -108,10 +108,10 @@ class UpdateAdmin(Resource):
 
         if con_number == -1:
             return {'message': {'con_number':
-                                    'No consignment number provided'}}, 400
+                                'No consignment number provided'}}, 400
 
         if current_identity.role.role_name != 'admin':
-            return {'description': 'Access denied.'}, 403
+            return {'description': 'Access denied.'}, 401
 
         # Find the consignment note information.
         order = Order.query.filter_by(id=con_number).first()
@@ -147,7 +147,7 @@ class UpdateDriver(Resource):
 
         if con_number == -1:
             return {'message': {'con_number':
-                                    'No consignment number provided'}}, 400
+                                'No consignment number provided'}}, 400
 
         # Find the consignment note information.
         order = Order.query.filter_by(id=con_number).first()
@@ -157,9 +157,9 @@ class UpdateDriver(Resource):
         if current_identity.role.role_name != 'admin':
             if current_identity.role.role_name == 'driver':
                 if order.driver_id != current_identity.id:
-                    return {'description': 'Access denied.'}, 403
+                    return {'description': 'Access denied.'}, 401
             else:
-                return {'description': 'Access denied.'}, 403
+                return {'description': 'Access denied.'}, 401
 
         order.driver_notes = admin_comments
 

@@ -167,7 +167,7 @@ class BookItem(Resource):
             return {'message': {'email': 'No packages provided'}}, 400
 
         if current_identity.role.role_name != 'user':
-            return {'message': {'email': 'Only users can order packages'}}, 403
+            return {'message': {'email': 'Only users can order packages'}}, 401
 
         pickup_contact = Contact(business_name=pickup['businessName'],
                                  contact_name=pickup['contactName'],

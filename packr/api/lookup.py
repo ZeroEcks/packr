@@ -41,9 +41,9 @@ class LookupItem(Resource):
             if order.user_id != current_identity.id:
                 if current_identity.role.role_name == 'driver':
                     if order.driver_id != current_identity.id:
-                        return {'description': 'Access denied.'}, 403
+                        return {'description': 'Access denied.'}, 401
                 else:
-                    return {'description': 'Access denied.'}, 403
+                    return {'description': 'Access denied.'}, 401
 
         statuses = list()
 
