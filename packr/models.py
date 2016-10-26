@@ -145,11 +145,15 @@ class Order(SurrogatePK, Model):
                         nullable=False,
                         default=dt.datetime.utcnow)
     weight = Column(db.Float(), nullable=False)
-    details = Column(db.Text, nullable=True)
     notes = Column(db.Text, nullable=True)
     driver_notes = Column(db.Text, nullable=True)
     cost = Column(db.Float, nullable=False)
     eta = Column(db.Date, nullable=True)
+    pickup_time = Column(db.DateTime,
+                         nullable=False,
+                         default=dt.datetime.utcnow)
+    fragile = Column(db.Boolean(), nullable=False)
+    payment_type = Column(db.String(20), nullable=False)
     user_id = Column(db.Integer, db.ForeignKey('users.id'))
     driver_id = Column(db.Integer, db.ForeignKey('users.id'))
     delivery_address_id = Column(db.Integer, db.ForeignKey('addresses.id'))
@@ -158,7 +162,6 @@ class Order(SurrogatePK, Model):
     pickup_contact_id = Column(db.Integer, db.ForeignKey('contacts.id'))
     danger_id = Column(db.Integer(), db.ForeignKey('danger_classes.id'))
     service_type_id = Column(db.Integer(), db.ForeignKey('service_types.id'))
-    fragile = Column(db.Boolean(), nullable=False)
 
     danger = relationship('DangerClass', uselist=False)
     payment = relationship("Payment",

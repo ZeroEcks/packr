@@ -72,7 +72,7 @@ class QuoteItem(Resource):
 
         args = req_parse.parse_args()
 
-        contactName = args.get('contactName')
+        contact_name = args.get('contactName')
         phone = args.get('phone')
         email = args.get('email')
         service_type = args.get('type')
@@ -83,7 +83,7 @@ class QuoteItem(Resource):
         post_code = args.get('postCode')
         packages = json.loads(args.get('packages'))
 
-        if contactName == '':
+        if contact_name == '':
             return {'message': {'email': 'No contact name provided'}}, 400
 
         if phone == '':

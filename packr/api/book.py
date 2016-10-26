@@ -3,8 +3,9 @@ import re
 
 import datetime
 
+import dateutil
 from flask_restplus import Namespace, Resource, fields, reqparse
-from flask_jwt import current_identity
+from flask_jwt import current_identity, jwt_required
 
 from packr.models import Contact, Address, Order, Package, DangerClass, \
     ServiceType
@@ -25,8 +26,8 @@ booking = api.model('Book', {
                              description="If the package is fragile"),
     'paymentType': fields.String(readOnly=True,
                                  description='The payment type'),
-    'comments': fields.String(readOnly=True,
-                              description='The customer comments'),
+    'customerComments': fields.String(readOnly=True,
+                                      description='The customer comments'),
     'packages': fields.String(readOnly=True,
                               description='A JSON map of the packages')
 })
@@ -36,6 +37,7 @@ booking = api.model('Book', {
 class BookItem(Resource):
     @api.expect(booking)
     @api.response(204, 'Created booking.')
+    @jwt_required()
     def post(self):
         req_parse = reqparse.RequestParser(bundle_errors=True)
         req_parse.add_argument('type', type=str,
@@ -57,7 +59,7 @@ class BookItem(Resource):
         req_parse.add_argument('paymentType', type=str, required=True,
                                help='No payment type provided',
                                location='json')
-        req_parse.add_argument('comments', type=str, required=False,
+        req_parse.add_argument('customerComments', type=str, required=False,
                                location='json')
         req_parse.add_argument('packages', type=str, required=True,
                                help='No packages list provided',
@@ -65,7 +67,7 @@ class BookItem(Resource):
 
         args = req_parse.parse_args()
 
-        serviceType = args.get('type')
+        service_type_name = args.get('type')
         dangerous = args.get('dangerous')
 
         pickup = json.loads(args.get('pickup'))
@@ -73,12 +75,10 @@ class BookItem(Resource):
         delivery = json.loads(args.get('delivery'))
 
         fragile = args.get('fragile')
-        paymentType = args.get('paymentType')
-        comments = args.get('comments')
+        payment_type_name = args.get('paymentType')
+        comments = args.get('customerComments')
 
         packages = json.loads(args.get('packages'))
-
-        print(pickup)
 
         if pickup['businessName'] == '':
             return {'message': {
@@ -157,7 +157,7 @@ class BookItem(Resource):
             return {'message': {
                 'email': 'No fragility provided'}}, 400
 
-        if paymentType == '':
+        if payment_type_name == '':
             return {'message': {
                 'email': 'No payment type provided'}}, 400
 
@@ -204,7 +204,18 @@ class BookItem(Resource):
             weight += float(package['weight'])
 
         danger_class = DangerClass.query.filter_by(name=dangerous).first()
-        service_type = ServiceType.query.filter_by(name=serviceType).first()
+        service_type = ServiceType.query.filter_by(name=
+                                                   service_type_name).first()
+
+        date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
+
+        eta = datetime.date.today()
+        if service_type_name == 'overnight':
+            eta += datetime.timedelta(days=1)
+        elif service_type.name == 'express':
+            eta += datetime.timedelta(days=3)
+        else:
+            eta += datetime.timedelta(days=5)
 
         new_order = Order(created_at=datetime.datetime.utcnow(),
                           cost=0,
@@ -217,8 +228,13 @@ class BookItem(Resource):
                           fragile=(fragile == 'yes'),
                           danger=danger_class,
                           user_id=current_identity.id,
-                          details=comments,
-                          service_type=service_type)
+                          notes=comments,
+                          service_type=service_type,
+                          payment_type=payment_type_name,
+                          eta=eta,
+                          pickup_time=datetime.datetime.strptime(
+                              pickup['dateTime'],
+                              date_format))
 
         new_order.save()
 
