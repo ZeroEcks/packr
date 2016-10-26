@@ -19,6 +19,9 @@ var angularLibsCss = [
     'packr/static/libs/angular-material/angular-material.css',
     'packr/static/libs/angular-material/angular-material.layouts.css'
 ];
+var images = [
+    'packr/static/img/**/*'
+];
 var angularAppJs = ['packr/static/app/**/*.js'];
 var angularAppScss = ['packr/static/css/*.scss'];
 
@@ -60,5 +63,10 @@ gulp.task('concat-libs-js', function () {
         .pipe(gulp.dest('packr/static/public/'));
 });
 
-gulp.task('build-app', ['concat-app-js', 'jshint', 'sass', 'concat-libs-js', 'concat-libs-css']);
+gulp.task('move-images', function () {
+   return gulp.src(images)
+       .pipe(gulp.dest('packr/static/public/img/'))
+});
+
+gulp.task('build-app', ['concat-app-js', 'jshint', 'sass', 'concat-libs-js', 'concat-libs-css', 'move-images']);
 gulp.task('default', ['jshint', 'build-app', 'watch']);
