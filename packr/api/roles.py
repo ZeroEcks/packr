@@ -1,9 +1,7 @@
-import datetime
-
 from flask.ext.jwt import jwt_required, current_identity
 from flask_restplus import Namespace, Resource, fields, reqparse
 
-from packr.models import Order, User, Role
+from packr.models import User, Role
 
 api = Namespace('roles',
                 description='Operations related to roles')

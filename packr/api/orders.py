@@ -1,7 +1,7 @@
 import datetime
 
 from flask.ext.jwt import jwt_required, current_identity
-from flask_restplus import Namespace, Resource, fields, reqparse
+from flask_restplus import Namespace, Resource
 
 from packr.models import Order
 
