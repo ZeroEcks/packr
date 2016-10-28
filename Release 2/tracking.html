@@ -1,0 +1,40 @@
+<!-- This page should only be available to customers that are logged in -->
+<md-content layout-padding>
+	<h2>Track a consignment</h2>
+	<!-- search for consignment -->
+	<form action="" method="post">	
+		<h3>Consignment#:</h3>
+		<input type="search" name="connote_number""></input>
+		<input type="submit" value="Search"></input>		
+	</form>
+    
+    <!-- display consignment details -->
+    <h3>ETA</h3>
+    <textarea name="eta" disabled></textarea>
+    
+    <!-- Picked up, Warehouse, Delivered -->
+    <h3>Consignment Status</h3>
+    <table name="trackingList">
+        <tr>
+            <th>Date</th>
+            <th>Location</th>
+            <th>Status</th>
+        </tr>
+        <tr>
+            <td>20/10/2016 9:00am</td>
+            <td>13 Somewhere St, Suburb</td>
+            <td>Picked up</td>
+        </tr>
+        <tr>
+            <td>20/10/2016 4:32pm</td>
+            <td>13 Somewhereelse St, Suburb</td>
+            <td>Delivered</td>
+        </tr>
+    </table>
+    
+    <h3>Pickup Address</h3>		
+    <textarea name="etaPickupAddress" disabled></textarea>
+    
+    <h3>Delivery Address</h3>
+    <textarea name="etaDeliveryAddress" disabled></textarea>
+</md-content>

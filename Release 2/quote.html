@@ -1,0 +1,132 @@
+<!-- This page should send an email to the admin, with the submitted data -->
+<md-content layout-padding>
+	<h2>Request a Quote</h2>
+	<form action="" method="post">
+	
+		<h3>Account number (if available):</h3>
+		<input type="number"></input>
+		
+		<h3>Business Name</h3>
+		<input type="text" name="quoteName" placeholder="Business name"></input>
+		<p>Contact</p>
+		<input type="text" name="quoteContact" placeholder="Contact"></input>
+		<p>Phone</p>
+		<input type="number" name="quotePhone" placeholder="Phone"></input>
+		<p>Email</p>
+		<input type="email" name="quoteEmail" placeholder="user@email.com"></input>
+				
+		<h3>Service Type</h3>		
+		<select name="service">
+			<option value="standard">Standard</option>
+			<option value="express">Express</option>
+			<option value="overnight">Overnight</option>
+			<option value="dangerous">Dangerous Goods</option>
+		</select>
+		
+		<h3>Pickup Address</h3>
+		
+		<p>Street Number and Name</p>
+		<input type="text" name="pickupStreet" placeholder="Street Number and Name"></input>
+		<p>Suburb</p>
+		<input type="text" name="pickupSuburb" placeholder="Suburb"></input>
+		<p>State</p>
+		<input type="text" name="pickupState" placeholder="State"></input>
+		<p>Post Code</p>
+		<input type="number" name="pickupPostCode" placeholder="Post Code"></input>
+		
+		<h3>Delivery Address</h3>
+		
+		<p>Street Number and Name</p>
+		<input type="text" name="deliveryStreet" placeholder="Street Number and Name"></input>
+		<p>Suburb</p>
+		<input type="text" name="deliverySuburb" placeholder="Suburb"></input>
+		<p>State</p>
+		<input type="text" name="deliveryState" placeholder="State"></input>
+		<p>Post Code</p>
+		<input type="number" name="deliveryPostcode" placeholder="Post Code"></input>
+								
+		<h3>Dangerous Goods Type:</h3>
+		<select name="dangerous">
+			<option value="none">No Dangerous Goods</option>
+			<option value="explosives">Explosives</option>
+			<option value="gases">Gases</option>
+			<option value="flammable">Flammable Substances</option>
+			<option value="oxidizing">Oxidizing Substances</option>
+			<option value="toxic">Toxic Substances</option>
+			<option value="corrosives">Corrosives</option>			
+			<option value="misc">Miscellaneous</option>
+		</select>
+		
+		<h3>Packages:</h3>
+		<table name="packages">
+			<tr>
+				<th>Weight</th>
+				<th>Length</th>
+				<th>Width</th>
+				<th>Height</th>
+			</tr>
+			<tr>
+				<td><input type="number" name="pOneWeight"></input></td>
+				<td><input type="number" name="pOneLength"></input></td>
+				<td><input type="number" name="pOneWidth"></input></td>
+				<td><input type="number" name="pOneHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pTwoWeight"></input></td>
+				<td><input type="number" name="pTwoLength"></input></td>
+				<td><input type="number" name="pTwoWidth"></input></td>
+				<td><input type="number" name="pTwoHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pThreeWeight"></input></td>
+				<td><input type="number" name="pThreeLength"></input></td>
+				<td><input type="number" name="pThreeWidth"></input></td>
+				<td><input type="number" name="pThreeHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pFourWeight"></input></td>
+				<td><input type="number" name="pFourLength"></input></td>
+				<td><input type="number" name="pFourWidth"></input></td>
+				<td><input type="number" name="pFourHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pFiveWeight"></input></td>
+				<td><input type="number" name="pFiveLength"></input></td>
+				<td><input type="number" name="pFiveWidth"></input></td>
+				<td><input type="number" name="pFiveHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pSixWeight"></input></td>
+				<td><input type="number" name="pSixLength"></input></td>
+				<td><input type="number" name="pSixWidth"></input></td>
+				<td><input type="number" name="pSixHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pSevenWeight"></input></td>
+				<td><input type="number" name="pSevenLength"></input></td>
+				<td><input type="number" name="pSevenWidth"></input></td>
+				<td><input type="number" name="pSevenHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pEightWeight"></input></td>
+				<td><input type="number" name="pEightLength"></input></td>
+				<td><input type="number" name="pEightWidth"></input></td>
+				<td><input type="number" name="pEightHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pNineWeight"></input></td>
+				<td><input type="number" name="pNineLength"></input></td>
+				<td><input type="number" name="pNineWidth"></input></td>
+				<td><input type="number" name="pNineHeight"></input></td>
+			</tr>
+			<tr>
+				<td><input type="number" name="pTenWeight"></input></td>
+				<td><input type="number" name="pTenLength"></input></td>
+				<td><input type="number" name="pTenWidth"></input></td>
+				<td><input type="number" name="pTenHeight"></input></td>
+			</tr>
+		</table>
+		
+		<input type="submit" value="Request a Quote"></input>
+	</form> 
+</md-content>
